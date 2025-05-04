@@ -10,7 +10,7 @@ Here are some sites I find handy, collected over time.
 
 <hr>
 
-{% assign sorted_websites = site.collections.websites | sort: "title" %}
+{% assign sorted_websites = site.collections.websites | default: [] | sort_natural: "title" %}
 
 {% for site_item in sorted_websites %}
 <div class="website-entry" style="margin-bottom: 1.5em;">
