@@ -1,3 +1,4 @@
 - [Home](/)
 - [Guide](guide.md)
 - [FAQ](faq.md)
+- [Clubs](clubs.md)
