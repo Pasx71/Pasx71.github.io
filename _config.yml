@@ -23,8 +23,10 @@ url: "https://your-username.github.io" # <--- CHANGE THIS to your site's domain
 github_username: your-username # <--- CHANGE THIS (Optional, used by some themes)
 
 # Use the Minima theme, fetched remotely for simplicity with GitHub Pages
-remote_theme: jekyll/minima@latest
+      
+remote_theme: jekyll/minima@v2.5.1
 
+    
 # Minima theme settings (optional, check Minima docs for more)
 minima:
   # Minima skins: air, classic, dark, default, solarized-dark, solarized-light
