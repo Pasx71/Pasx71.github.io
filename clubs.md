@@ -2,10 +2,49 @@
 
 Welcome to the Clubs section.
 
-Here you'll find information, links, and notes about different clubs, societies, or communities relevant to this knowledge base.
+## 🔍 Academic Clubs
 
-## Example Clubs
+<details>
+<summary>History Circle</summary>
 
-- **History Circle** – Focused on historical analysis and discussions  
-- **Tech Guild** – Explores modern tools and frameworks  
-- **Writers’ Workshop** – Peer reviews, editing, and storytelling tips
+A group focused on discussion of ancient and modern history, historiography, and related sources.
+
+- Weekly meetings
+- Guest speakers
+- Archive sessions
+
+</details>
+
+<details>
+<summary>Science Society</summary>
+
+Discusses scientific topics across disciplines. Occasional experiments and seminars.
+
+- Physics, Chemistry, Bio focus
+- Paper review circles
+
+</details>
+
+## 🛠️ Creative & Technical Clubs
+
+<details>
+<summary>Tech Guild</summary>
+
+A club exploring modern tools and frameworks, open source, and project showcases.
+
+- Web dev
+- AI / ML
+- GitHub workshops
+
+</details>
+
+<details>
+<summary>Writers’ Workshop</summary>
+
+Peer-reviewed storytelling and feedback sessions.
+
+- Flash fiction contests
+- Long-form critiques
+- Writing sprints
+
+</details>
