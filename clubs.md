@@ -28,9 +28,9 @@ Peer-reviewed storytelling and feedback sessions.
 
 </details>
 
-## Appreciation Clubs
+## Book Lists
 
-These clubs delve into studying, discussing, and appreciating existing knowledge, history, or scientific fields.
+These Books delve into studying, discussing, and appreciating existing knowledge, history, or scientific fields.
 
 <details>
 <summary>History Circle</summary>
