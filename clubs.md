@@ -1,10 +1,10 @@
-# Clubs
+# Lists
 
-Welcome to the Clubs section. Here they are organized by their primary focus.
+Welcome to the Lists section. Here they are organized by their primary focus.
 
-## Creative Clubs
+## List of Useful Organizations
 
-These clubs focus on making, building, and producing original work.
+These Organizations are intresting to me for one reason or another.
 
 <details>
 <summary>Tech Guild</summary>
