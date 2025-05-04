@@ -2,7 +2,10 @@
 layout: none # Important: Prevents Jekyll from applying HTML layout
 ---
 [
-  {% assign all_items = site.posts | concat: site.collections.websites %}
+  {% assign posts_array = site.posts | default: [] %}
+  {% assign websites_array = site.collections.websites | default: [] %}
+  {% assign all_items = posts_array | concat: websites_array %}
+
   {% for item in all_items %}
     {
       "title": {{ item.title | jsonify }},
