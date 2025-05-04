@@ -24,7 +24,7 @@ github_username: your-username # <--- CHANGE THIS (Optional, used by some themes
 
 # Use the Minima theme, fetched remotely for simplicity with GitHub Pages
       
-remote_theme: jekyll/minima@v2.5.1
+remote_theme: jekyll/minima@master
 
     
 # Minima theme settings (optional, check Minima docs for more)
