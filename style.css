@@ -8,6 +8,8 @@ body {
     color: #333;
 }
 
+/* This rule was in your HTML but makes more sense here or removed if not styling a specific container */
+/*
 .container {
     max-width: 800px;
     margin: auto;
@@ -16,9 +18,24 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
+*/
+
+header, main, footer {
+    max-width: 800px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
 
 h1, h2, h3 {
     color: #333;
+}
+
+#quiz-section p {
+    margin-bottom: 15px;
 }
 
 .question-group {
@@ -26,6 +43,12 @@ h1, h2, h3 {
     padding-bottom: 15px;
     border-bottom: 1px solid #eee;
 }
+.question-group:last-of-type { /* Remove border from last group */
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 15px;
+}
+
 
 .question-item {
     margin-bottom: 15px;
@@ -33,13 +56,18 @@ h1, h2, h3 {
 
 .question-item p {
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .likert-scale {
     display: flex;
-    justify-content: space-around; /* Or space-between */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    justify-content: space-around;
     align-items: center;
     margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #efefef;
+    border-radius: 4px;
 }
 
 .likert-scale label {
@@ -48,30 +76,34 @@ h1, h2, h3 {
     align-items: center;
     font-size: 0.9em;
     cursor: pointer;
+    padding: 5px;
+    min-width: 40px; /* Ensure some spacing */
+    text-align: center;
 }
 .likert-scale input[type="radio"] {
-    margin-bottom: 3px;
+    margin-top: 5px; /* Space between number and radio */
 }
 
 
 button[type="submit"] {
     display: block;
     width: 100%;
-    padding: 10px;
+    padding: 12px 20px;
     background-color: #5cb85c;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1.1em;
-    margin-top: 20px;
+    margin-top: 25px;
+    transition: background-color 0.2s ease-in-out;
 }
 
 button[type="submit"]:hover {
     background-color: #4cae4c;
 }
 
-#resultsContainer {
+#results-section { /* Changed from #resultsContainer to match HTML */
     margin-top: 30px;
     padding: 20px;
     background-color: #e9f7ef;
@@ -79,15 +111,22 @@ button[type="submit"]:hover {
     border-radius: 5px;
 }
 
-#scoresList {
+#result-scores-list { /* Changed from #scoresList to match HTML */
     list-style-type: none;
     padding: 0;
 }
 
-#scoresList li {
-    padding: 5px 0;
+#result-scores-list li { /* Changed from #scoresList li */
+    padding: 8px 0;
     border-bottom: 1px dotted #ccc;
 }
-#scoresList li:last-child {
+#result-scores-list li:last-child {
     border-bottom: none;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: #777;
 }
