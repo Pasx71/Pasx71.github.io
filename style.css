@@ -6,7 +6,7 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 20px;
-    background-color: #f4f7f6; /* Slightly softer background */
+    background-color: #f4f7f6;
     color: #333;
     font-size: 16px;
 }
@@ -15,9 +15,9 @@ header, main, footer {
     max-width: 800px;
     margin: 20px auto;
     background: #fff;
-    padding: 25px 30px; /* Slightly more padding */
+    padding: 25px 30px;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Softer shadow */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 header {
@@ -32,23 +32,23 @@ footer {
     font-size: 0.9em;
     color: #777;
     padding: 15px;
-    background: none; /* Footer doesn't need a white box if body has one */
+    background: none;
     box-shadow: none;
 }
 
 /* --- Headings & Text --- */
 h1 {
-    color: #2c3e50; /* Darker, more professional blue */
+    color: #2c3e50;
     margin-bottom: 0.5em;
     font-size: 2em;
 }
 
 h2 {
-    color: #34495e; /* Another shade of blue/grey */
+    color: #34495e;
     margin-top: 1em;
     margin-bottom: 0.8em;
     font-size: 1.6em;
-    border-bottom: 1px solid #ecf0f1; /* Light separator */
+    border-bottom: 1px solid #ecf0f1;
     padding-bottom: 0.3em;
 }
 
@@ -86,9 +86,9 @@ p {
     margin-bottom: 20px;
 }
 
-.question-item p { /* The question text itself */
+.question-item p {
     margin-bottom: 10px;
-    font-weight: 500; /* Slightly bolder */
+    font-weight: 500;
     color: #2c3e50;
     font-size: 1.05em;
 }
@@ -98,9 +98,9 @@ p {
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    margin-top: 5px; /* Space below question text */
+    margin-top: 5px;
     padding: 8px 5px;
-    background-color: #f9f9f9; /* Slight background for the scale */
+    background-color: #f9f9f9;
     border: 1px solid #e0e0e0;
     border-radius: 6px;
 }
@@ -127,11 +127,11 @@ p {
     cursor: pointer;
 }
 
-button[type="submit"]#submitButton { /* Specific to the main submit button */
+button[type="submit"]#submitButton {
     display: block;
     width: 100%;
     padding: 12px 20px;
-    background-color: #28a745; /* Green for go/submit */
+    background-color: #28a745;
     color: white;
     border: none;
     border-radius: 6px;
@@ -144,7 +144,7 @@ button[type="submit"]#submitButton { /* Specific to the main submit button */
 }
 
 button[type="submit"]#submitButton:hover {
-    background-color: #218838; /* Darker green */
+    background-color: #218838;
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
@@ -152,9 +152,9 @@ button[type="submit"]#submitButton:hover {
 /* --- Results Section Specifics --- */
 #results-section {
     margin-top: 30px;
-    padding: 25px 30px; /* Match main padding */
-    background-color: #e9f7ef; /* Light green tint for results */
-    border: 1px solid #c8e6c9; /* Softer green border */
+    padding: 25px 30px;
+    background-color: #e9f7ef;
+    border: 1px solid #c8e6c9;
     border-radius: 8px;
 }
 
@@ -162,11 +162,11 @@ button[type="submit"]#submitButton:hover {
 .results-actions {
     margin-bottom: 25px;
     padding-bottom: 20px;
-    border-bottom: 1px solid #d1e7dd; /* Border matching results background */
+    border-bottom: 1px solid #d1e7dd;
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
-    justify-content: center; /* Center buttons if they don't fill width */
+    justify-content: center;
 }
 
 .results-actions button {
@@ -180,47 +180,61 @@ button[type="submit"]#submitButton:hover {
     font-weight: 500;
 }
 .results-actions button:hover {
-    transform: translateY(-1px); /* Slight lift on hover */
+    transform: translateY(-1px);
 }
 
 .results-actions button#retakeQuizButton {
-    background-color: #ffc107; /* Amber/Yellow for retake */
-    color: #212529; /* Dark text for yellow button */
+    background-color: #ffc107;
+    color: #212529;
 }
 .results-actions button#retakeQuizButton:hover {
     background-color: #e0a800;
 }
 
 .results-actions button#savePdfButton {
-    background-color: #17a2b8; /* Teal for save/print */
+    background-color: #17a2b8;
 }
 .results-actions button#savePdfButton:hover {
     background-color: #138496;
 }
 
 .results-actions button#shareResultsButton {
-    background-color: #007bff; /* Standard blue for share */
+    background-color: #007bff;
 }
 .results-actions button#shareResultsButton:hover {
     background-color: #0056b3;
 }
 
-/* Main Archetype Component Blurbs */
-#results-section #printable-results-area > p { /* Direct children paragraphs in printable area */
+/* Main Archetype Information in Printable Area */
+#results-section #printable-results-area > p { /* For "Full Archetype Name" and "Personality Code" lines */
     font-size: 1.05em;
     margin-bottom: 0.7em;
 }
-#results-section #printable-results-area > p > span { /* The actual name/code spans */
+#results-section #printable-results-area > p > span { /* Spans containing the actual name/code */
     font-weight: 500;
-    color: #1a5276; /* Specific color for archetype names */
+    color: #1a5276;
 }
-#results-section #printable-results-area > h3 + p { /* Paragraphs immediately after H3 (component blurbs) */
-    margin-left: 15px; /* Indent component blurbs */
+
+/* Styling for Archetype Component paragraphs (Prefix, Core, etc.) */
+.archetype-component {
     color: #444;
+    margin-bottom: 0.6em; /* Consistent spacing for these items */
+    /* margin-left: 15px; */ /* <<< Add this if you want these lines indented. Remove/comment if not. */
+    font-size: 1.05em; /* Match the other main result lines */
 }
 
+.archetype-component strong { /* For "Prefix:", "Core:", etc. labels */
+    color: #2c3e50; /* Consistent with other strong text */
+    font-weight: bold; /* Ensure it's bold */
+}
+.archetype-component span[id*="-name"] { /* Spans containing Prefix Name, Core Name etc. */
+     font-weight: 500; /* Same as other name spans */
+     color: #1a5276;
+}
+/* The blurb part (after the hyphen) will inherit from .archetype-component */
 
-/* Styling for the new Detailed Trait information list */
+
+/* Styling for the Detailed Trait information list */
 #result-scores-list {
     list-style-type: none;
     padding: 0;
@@ -229,18 +243,22 @@ button[type="submit"]#submitButton:hover {
 
 #result-scores-list > h3 { /* For the "Understanding Your Traits:" heading, if added by JS */
     margin-bottom: 18px;
-    font-size: 1.4em; /* Make it stand out a bit more */
+    font-size: 1.4em;
     color: #34495e;
     border-bottom: 1px solid #d1e7dd;
     padding-bottom: 8px;
 }
 
-#result-scores-list li {
+#result-scores-list > li { /* Direct li children - each trait item */
     padding: 12px 0;
-    border-bottom: 1px dashed #d1e7dd; /* Lighter, dashed border */
+    border-bottom: 1px dashed #d1e7dd;
 }
-#result-scores-list li:last-of-type { /* Last actual trait item */
-    border-bottom: none;
+#result-scores-list > li:last-of-type {
+    /* This might target an alternative-suggestion-item if it's the absolute last.
+       Consider if you always want the last TRAIT item to have no border,
+       or if the last item overall should have no border.
+       For now, let's assume the last direct trait item.
+    */
 }
 
 /* Trait name, score, direction line */
@@ -251,43 +269,39 @@ button[type="submit"]#submitButton:hover {
     font-size: 1.1em;
 }
 
-/* The trait description blurb itself */
-#result-scores-list li > br + span, /* If JS adds a <br> before the blurb span */
-#result-scores-list li > span:not([id]) /* Target generic spans, avoiding ID'd spans */
-{
+/* The trait description blurb text */
+.trait-description-text { /* Class added in JS to the span containing the blurb */
     display: block;
-    color: #495057; /* Dark grey for readability */
+    color: #495057;
     line-height: 1.55;
     font-size: 0.98em;
-    margin-top: 4px; /* Small space after the strong tag */
+    margin-top: 4px;
 }
 
 
-/* Styling for the alternative suggestion text - applied to the <li> if JS adds it */
-/* It's better to add a class to this li via JS, e.g., class="alternative-suggestion-item" */
-/* For now, this targets an li that might contain the structure from JS */
-#result-scores-list li[style*="italic"] { /* Basic targeting based on inline style from JS */
+/* Styling for the alternative suggestion item (li with this class) */
+.alternative-suggestion-item {
     font-style: italic;
     color: #586069;
     margin-top: 10px;
-    padding: 10px 10px 10px 15px; /* Add some padding all around */
+    padding: 10px 10px 10px 15px;
     border-left: 3px solid #a1c4fd;
-    background-color: #f6f8fa;
+    background-color: #f0f4f8; /* Slightly different background */
     font-size: 0.95em;
-    border-bottom: none !important; /* Ensure no double border if it's the last child */
+    border-bottom: none !important; /* Usually don't want a bottom border here */
     border-radius: 4px;
 }
 
-#result-scores-list li[style*="italic"] strong { /* For the alternative name part */
-    color: #0366d6;
-    font-style: normal; /* Reset italic if needed, or keep if desired */
+.alternative-suggestion-item strong { /* For the alternative name part */
+    color: #007bff; /* Brighter blue for the suggestion */
+    font-style: normal;
 }
-#result-scores-list li[style*="italic"] em { /* For the blurb of the alternative */
+.alternative-suggestion-item em { /* For the blurb of the alternative */
     color: #333;
-    font-style: normal; /* Reset italic for blurb part */
+    font-style: normal;
 }
 
-/* Minor adjustments for very small screens if needed */
+/* Responsive adjustments */
 @media (max-width: 480px) {
     body {
         padding: 10px;
@@ -300,10 +314,10 @@ button[type="submit"]#submitButton:hover {
     h3 { font-size: 1.2em; }
 
     .results-actions {
-        flex-direction: column; /* Stack buttons vertically */
+        flex-direction: column;
     }
     .results-actions button {
-        width: 100%; /* Make buttons full width */
+        width: 100%;
         margin-bottom: 8px;
     }
     .results-actions button:last-child {
