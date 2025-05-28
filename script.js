@@ -2,35 +2,32 @@
 document.addEventListener('DOMContentLoaded', () => {
     const questionsContainer = document.getElementById('questions-container');
     const quizForm = document.getElementById('quizForm');
-    const resultsContainer = document.getElementById('results-section'); // Matches HTML
-    const introductionSection = document.getElementById('quiz-section').querySelector('p'); // For hiding intro text
+    const resultsContainer = document.getElementById('results-section');
+    const introductionPara = document.getElementById('quiz-section').querySelector('p'); // To hide "Please answer all questions below."
 
     // --- Helper: Load Questions into HTML ---
     function loadQuestions() {
-        // console.log("loadQuestions function called.");
         let questionNumber = 0;
 
+        if (!questionsContainer) {
+            console.error("CRITICAL: 'questions-container' element not found in HTML.");
+            return;
+        }
         if (!PRIMARY_AXIS_CODES_FOR_QUESTIONS || Object.keys(PRIMARY_AXIS_CODES_FOR_QUESTIONS).length === 0) {
             console.error("PRIMARY_AXIS_CODES_FOR_QUESTIONS is missing or empty in data.js!");
-            if(questionsContainer) questionsContainer.innerHTML = "<p style='color:red;'>Error: Could not load axis data.</p>";
+            questionsContainer.innerHTML = "<p style='color:red;'>Error: Could not load axis data.</p>";
             return;
         }
         if (!QUESTIONS_BANK || Object.keys(QUESTIONS_BANK).length === 0) {
             console.error("QUESTIONS_BANK is missing or empty in data.js!");
-            if(questionsContainer) questionsContainer.innerHTML = "<p style='color:red;'>Error: Could not load question data.</p>";
-            return;
-        }
-        if (!questionsContainer) {
-            console.error("The 'questions-container' element was not found in the HTML!");
+            questionsContainer.innerHTML = "<p style='color:red;'>Error: Could not load question data.</p>";
             return;
         }
 
         questionsContainer.innerHTML = ''; // Clear any existing content
 
         for (const axisCode in PRIMARY_AXIS_CODES_FOR_QUESTIONS) {
-            // console.log(`Processing axis: ${axisCode}`);
             if (QUESTIONS_BANK[axisCode]) {
-                // console.log(`Found questions for ${axisCode} in QUESTIONS_BANK.`);
                 const groupDiv = document.createElement('div');
                 groupDiv.classList.add('question-group');
                 const groupTitle = document.createElement('h3');
@@ -62,41 +59,50 @@ document.addEventListener('DOMContentLoaded', () => {
                     groupDiv.appendChild(itemDiv);
                 });
                 questionsContainer.appendChild(groupDiv);
-                // console.log(`Appended question group for ${axisCode} to the container.`);
             } else {
                 console.warn(`No questions found in QUESTIONS_BANK for axisCode: ${axisCode}`);
             }
         }
         if (questionNumber === 0) {
             console.warn("No questions were loaded into the page. Check data and logic.");
-            if(questionsContainer) questionsContainer.innerHTML = "<p style='color:orange;'>Warning: No questions were loaded. Please check the configuration.</p>";
-        } else {
-             // console.log(`Successfully loaded ${questionNumber} questions.`);
+            questionsContainer.innerHTML = "<p style='color:orange;'>Warning: No questions were loaded. Please check the configuration.</p>";
         }
     }
 
-    // --- Logic from archetype_system.py (ported to JS) ---
+    // --- Helper: Get Alternative Archetype Name Part ---
+    function getAlternativeNamePartIfFlipped(originalScores, traitToFlip, determinationFunction) {
+        const flippedScores = { ...originalScores }; // Create a shallow copy
 
+        if (originalScores[traitToFlip] <= MID_LIKERT_POINT) {
+            flippedScores[traitToFlip] = MID_LIKERT_POINT + 0.01;
+        } else {
+            flippedScores[traitToFlip] = MID_LIKERT_POINT - 0.01;
+        }
+
+        const originalNamePart = determinationFunction(originalScores);
+        const alternativeNamePart = determinationFunction(flippedScores);
+
+        if (alternativeNamePart !== originalNamePart) {
+            return alternativeNamePart;
+        }
+        return null;
+    }
+
+
+    // --- Logic from archetype_system.py (ported to JS) ---
     function calculateAllScores(userResponses) {
         const allCalculatedScores = {};
-
-        for (const axisCode in QUESTIONS_BANK) { // Iterate over QUESTIONS_BANK to ensure we cover all defined question sets
+        for (const axisCode in QUESTIONS_BANK) {
             if (axisCode === 'M') continue;
-
             const responses = userResponses[axisCode];
-            if (!responses) { // This might happen if an axis in QUESTIONS_BANK isn't in PRIMARY_AXIS_CODES_FOR_QUESTIONS
-                console.warn(`No responses found for axis: ${axisCode} during calculation, though it exists in QUESTIONS_BANK. Skipping.`);
+            if (!responses) {
+                console.warn(`No responses for axis: ${axisCode} in userResponses, skipping calculation for it.`);
                 continue;
             }
-            // It's possible QUESTIONS_BANK has more axes than PRIMARY_AXIS_CODES_FOR_QUESTIONS (e.g. if M was still there)
-            // but the form only generates inputs based on PRIMARY_AXIS_CODES_FOR_QUESTIONS.
-            // So, only process if responses exist for it.
-
             if (responses.length !== QUESTIONS_PER_STANDARD_AXIS) {
-                 console.error(`Expected ${QUESTIONS_PER_STANDARD_AXIS} responses for ${axisCode}, got ${responses.length}.`);
-                 return null; // Or handle more gracefully
+                 console.error(`Expected ${QUESTIONS_PER_STANDARD_AXIS} for ${axisCode}, got ${responses.length}`);
+                 return null;
             }
-
             let currentAxisScoreSum = 0.0;
             QUESTIONS_BANK[axisCode].forEach((questionData, i) => {
                 let responseVal = parseFloat(responses[i]);
@@ -108,54 +114,42 @@ document.addEventListener('DOMContentLoaded', () => {
             allCalculatedScores[axisCode] = currentAxisScoreSum / QUESTIONS_PER_STANDARD_AXIS;
         }
 
-        // Handle Motivational Style 'M'
         if (QUESTIONS_BANK['M'] && userResponses['M']) {
             const mResponses = userResponses['M'];
              if (mResponses.length !== QUESTIONS_FOR_MOTIVATIONAL_AXIS) {
                 console.error(`Expected ${QUESTIONS_FOR_MOTIVATIONAL_AXIS} for M, got ${mResponses.length}`);
                 return null;
             }
-
             const subScoresSum = {'H': 0.0, 'G': 0.0, 'R': 0.0};
             const subScoresCount = {'H': 0, 'G': 0, 'R': 0};
-
             QUESTIONS_BANK['M'].forEach((questionData, i) => {
                 let responseVal = parseFloat(mResponses[i]);
                 const subAxisKey = questionData.sub_axis;
-
                 if (!subAxisKey || !subScoresSum.hasOwnProperty(subAxisKey)) {
-                    console.error(`Invalid or missing sub_axis '${subAxisKey}' for M question: ${questionData.text}`);
-                    // Potentially skip this question or return null depending on desired strictness
-                    return; // Skips this iteration of forEach
+                    console.error(`Invalid sub_axis '${subAxisKey}' for M question: ${questionData.text}`);
+                    return;
                 }
-
                 if (questionData.reverse) {
                     responseVal = (MAX_LIKERT_SCORE + MIN_LIKERT_SCORE) - responseVal;
                 }
                 subScoresSum[subAxisKey] += responseVal;
                 subScoresCount[subAxisKey]++;
             });
-
             for (const subKey in subScoresSum) {
                 if (subScoresCount[subKey] > 0) {
                     allCalculatedScores[`M_${subKey}`] = subScoresSum[subKey] / subScoresCount[subKey];
                 } else {
-                    // This might happen if M questions for a sub-axis were missing or had errors
-                    console.warn(`No questions/responses processed for M sub-axis M_${subKey}. Score will be missing.`);
-                    // To avoid errors later, we might assign a default or NaN
-                    // allCalculatedScores[`M_${subKey}`] = NaN; // Or handle as critical error
+                    console.warn(`No Qs/resps for M sub-axis M_${subKey}. Score will be missing.`);
                 }
             }
-        } else if (PRIMARY_AXIS_CODES_FOR_QUESTIONS.hasOwnProperty('M')) { // Only error if 'M' was expected
-             console.error("Motivational 'M' questions defined in PRIMARY_AXIS_CODES but responses or bank entry not found.");
-             return null; // Critical if M is part of the primary set
+        } else if (PRIMARY_AXIS_CODES_FOR_QUESTIONS.hasOwnProperty('M')) {
+             console.error("Motivational 'M' Qs expected but not found in responses/bank.");
+             return null;
         }
 
-        // Ensure all scorable axes (as per PERSONALITY_CODE_AXES_ORDER) are present
         for (const code of PERSONALITY_CODE_AXES_ORDER) {
             if (!(code in allCalculatedScores)) {
-                 console.error(`Internal Error: Score for axis '${code}' was not calculated or populated. This axis is required.`);
-                 // One reason could be an M_SubKey not getting calculated if there were issues
+                 console.error(`Internal Error: Score for axis '${code}' was not calculated.`);
                  return null;
             }
         }
@@ -168,8 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const score = calculatedScores[axisCode];
             if (score === undefined) {
                 console.error(`Score for '${axisCode}' not found for code gen.`);
-                // This indicates a problem in calculateAllScores if an axis in PERSONALITY_CODE_AXES_ORDER wasn't populated
-                codeLetters.push('?'); // Placeholder for missing score
+                codeLetters.push('?');
                 return;
             }
             const letterToUse = axisCode.includes('_') ? axisCode.split('_')[1] : axisCode;
@@ -178,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return codeLetters.join("");
     }
 
-    // --- Logic from naming_rules.py (ported to JS) ---
     function determinePrefixModifier(scores) {
         const mg_pos = scores['M_G'] > MID_LIKERT_POINT;
         const mr_pos = scores['M_R'] > MID_LIKERT_POINT;
@@ -210,20 +202,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const ma_pos = scores['Ma'] > MID_LIKERT_POINT;
         const ps_pos = scores['Ps'] > MID_LIKERT_POINT;
         const ax_pos = scores['Ax'] > MID_LIKERT_POINT;
-        const av_pos = scores['Av'] > MID_LIKERT_POINT; 
+        const av_pos = scores['Av'] > MID_LIKERT_POINT; // Corrected from MID_LERT_POINT
         const key = `${na_pos},${ma_pos},${ps_pos},${ax_pos},${av_pos}`;
         return PART4_QUALIFIER_MAP[key] || DEFAULT_PART4_QUALIFIER;
     }
 
-
-    function generateArchetypeNmeParts(calculatedScores) { // Renamed to avoid typo Name -> Nme
+    function generateArchetypeNmeParts(calculatedScores) {
         const prefix = determinePrefixModifier(calculatedScores);
         const core = determineCorePersonality(calculatedScores);
         const suffix = determineSuffixModifier(calculatedScores);
         const part4 = determinePart4Qualifier(calculatedScores);
         return { prefix, core, suffix, part4 };
     }
-
 
     // --- Main Quiz Submission Handler ---
     if (quizForm) {
@@ -232,82 +222,142 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const formData = new FormData(quizForm);
             const userResponses = {};
-
             for (const axisCode in PRIMARY_AXIS_CODES_FOR_QUESTIONS) {
                 userResponses[axisCode] = [];
             }
-
             for (const [key, value] of formData.entries()) {
                 const parts = key.split('_');
                 const axisCode = parts[1];
-                if(userResponses[axisCode] !== undefined){ // Check if the axisCode is a valid key
+                if(userResponses[axisCode] !== undefined){
                      userResponses[axisCode].push(parseInt(value));
                 } else {
-                    console.warn(`Unexpected form key for axis code: ${axisCode} from key ${key}`);
+                    console.warn(`Unexpected form key: ${key} (axis ${axisCode})`);
                 }
             }
 
-            let allAnswered = true;
             for (const axisCode in PRIMARY_AXIS_CODES_FOR_QUESTIONS) {
                 const expectedCount = axisCode === 'M' ? QUESTIONS_FOR_MOTIVATIONAL_AXIS : QUESTIONS_PER_STANDARD_AXIS;
                 if (!userResponses[axisCode] || userResponses[axisCode].length !== expectedCount) {
-                    allAnswered = false;
                     alert(`Please answer all questions for ${PRIMARY_AXIS_CODES_FOR_QUESTIONS[axisCode]}. (${userResponses[axisCode] ? userResponses[axisCode].length : 0}/${expectedCount} answered)`);
-                    return; // Exit if not all answered
+                    return;
                 }
             }
-            // No need for: if (!allAnswered) return; because the loop now returns directly.
-
 
             const calculatedScores = calculateAllScores(userResponses);
             if (!calculatedScores) {
-                alert("There was an error calculating scores. Please check the console for details.");
+                alert("Error calculating scores. Check console.");
                 return;
             }
 
             const personalityCode = generatePersonalityCode(calculatedScores);
-            const nameParts = generateArchetypeNmeParts(calculatedScores); // Corrected function name
+            const nameParts = generateArchetypeNmeParts(calculatedScores);
             const fullArchetypeName = `${nameParts.prefix} ${nameParts.core} ${nameParts.suffix} with ${nameParts.part4}`;
 
-            // Display results - IDs must match your index.html
+            // Display Main Archetype Info
             document.getElementById('result-full-name').textContent = fullArchetypeName;
             document.getElementById('result-code').textContent = personalityCode;
-
             document.getElementById('result-prefix-name').textContent = nameParts.prefix;
-            document.getElementById('result-prefix-blurb').textContent = PREFIX_MODIFIERS_BLURBS[nameParts.prefix] || "Blurb not found.";
+            document.getElementById('result-prefix-blurb').textContent = PREFIX_MODIFIERS_BLURBS[nameParts.prefix] || "N/A";
             document.getElementById('result-core-name').textContent = nameParts.core;
-            document.getElementById('result-core-blurb').textContent = CORE_PERSONALITIES_BLURBS[nameParts.core] || "Blurb not found.";
+            document.getElementById('result-core-blurb').textContent = CORE_PERSONALITIES_BLURBS[nameParts.core] || "N/A";
             document.getElementById('result-suffix-name').textContent = nameParts.suffix;
-            document.getElementById('result-suffix-blurb').textContent = SUFFIX_MODIFIERS_BLURBS[nameParts.suffix] || "Blurb not found.";
+            document.getElementById('result-suffix-blurb').textContent = SUFFIX_MODIFIERS_BLURBS[nameParts.suffix] || "N/A";
             document.getElementById('result-part4-name').textContent = nameParts.part4;
-            document.getElementById('result-part4-blurb').textContent = PART4_QUALIFIERS_BLURBS[nameParts.part4] || "Blurb not found.";
+            document.getElementById('result-part4-blurb').textContent = PART4_QUALIFIERS_BLURBS[nameParts.part4] || "N/A";
 
-            const scoresList = document.getElementById('result-scores-list'); // Matches HTML
-            scoresList.innerHTML = '';
+            // Display Detailed Trait Scores & Blurbs
+            const scoresListUl = document.getElementById('result-scores-list');
+            scoresListUl.innerHTML = '<h3>Understanding Your Traits:</h3>'; // Add a sub-heading
+
             PERSONALITY_CODE_AXES_ORDER.forEach(code => {
-                const li = document.createElement('li');
                 const score = calculatedScores[code];
-                li.textContent = `${ALL_SCORABLE_AXES_DEFINITIONS[code] || code} (${code}): ${score !== undefined ? score.toFixed(2) : 'N/A'}`;
-                scoresList.appendChild(li);
+                const traitFullName = ALL_SCORABLE_AXES_DEFINITIONS[code] || code;
+                let scoreDirection = "";
+                let traitBlurbText = "";
+
+                const traitSpecificBlurbs = TRAIT_DESCRIPTIONS ? TRAIT_DESCRIPTIONS[code] : null;
+
+                if (score > MID_LIKERT_POINT + GRAY_AREA_DELTA) {
+                    scoreDirection = "High";
+                    traitBlurbText = traitSpecificBlurbs ? traitSpecificBlurbs.high : "High score blurb unavailable.";
+                } else if (score < MID_LIKERT_POINT - GRAY_AREA_DELTA) {
+                    scoreDirection = "Low";
+                    traitBlurbText = traitSpecificBlurbs ? traitSpecificBlurbs.low : "Low score blurb unavailable.";
+                } else {
+                    scoreDirection = "Moderate";
+                    traitBlurbText = traitSpecificBlurbs ? traitSpecificBlurbs.moderate : "Moderate score blurb unavailable.";
+                }
+
+                const li = document.createElement('li');
+                li.innerHTML = `<strong>${traitFullName} (${code}): ${score.toFixed(2)} (${scoreDirection})</strong><br>${traitBlurbText}`;
+                scoresListUl.appendChild(li);
+
+                // Handle Moderate Score - Suggest Alternative Archetype Name Part
+                if (scoreDirection === "Moderate" && TRAIT_GROUPINGS && typeof getAlternativeNamePartIfFlipped === 'function') {
+                    let affectedDeterminationFunction = null;
+                    let originalNamePartForTraitStr = null;
+                    let namePartLabel = "";
+                    let blurbDictionaryForAlt = null;
+
+                    if (TRAIT_GROUPINGS.group1 && TRAIT_GROUPINGS.group1.codes.includes(code)) {
+                        affectedDeterminationFunction = determineCorePersonality;
+                        originalNamePartForTraitStr = nameParts.core;
+                        namePartLabel = "Core Personality";
+                        blurbDictionaryForAlt = CORE_PERSONALITIES_BLURBS;
+                    } else if (TRAIT_GROUPINGS.group2 && TRAIT_GROUPINGS.group2.codes.includes(code)) {
+                        affectedDeterminationFunction = determineSuffixModifier;
+                        originalNamePartForTraitStr = nameParts.suffix;
+                        namePartLabel = "Suffix Modifier";
+                        blurbDictionaryForAlt = SUFFIX_MODIFIERS_BLURBS;
+                    } else if (TRAIT_GROUPINGS.group3 && TRAIT_GROUPINGS.group3.codes.includes(code)) {
+                        affectedDeterminationFunction = determinePrefixModifier;
+                        originalNamePartForTraitStr = nameParts.prefix;
+                        namePartLabel = "Prefix Modifier";
+                        blurbDictionaryForAlt = PREFIX_MODIFIERS_BLURBS;
+                    } else if (TRAIT_GROUPINGS.group4 && TRAIT_GROUPINGS.group4.codes.includes(code)) {
+                        affectedDeterminationFunction = determinePart4Qualifier;
+                        originalNamePartForTraitStr = nameParts.part4;
+                        namePartLabel = "Qualifier";
+                        blurbDictionaryForAlt = PART4_QUALIFIERS_BLURBS;
+                    }
+
+                    if (affectedDeterminationFunction && originalNamePartForTraitStr && blurbDictionaryForAlt) {
+                        const alternativeNamePart = getAlternativeNamePartIfFlipped(
+                            calculatedScores, code, affectedDeterminationFunction
+                        );
+                        if (alternativeNamePart && alternativeNamePart !== originalNamePartForTraitStr) {
+                            const altBlurb = blurbDictionaryForAlt[alternativeNamePart] || "Alt blurb N/A.";
+                            const altLi = document.createElement('li');
+                            altLi.style.paddingLeft = "20px";
+                            altLi.style.fontStyle = "italic";
+                            altLi.style.marginTop = "5px";
+                            altLi.style.color = "#555";
+                            altLi.innerHTML = `↪ Because your ${traitFullName} score is moderate, if it leaned differently,
+                                               your '${namePartLabel}' could also be expressed as
+                                               '<strong>${alternativeNamePart}</strong>' <em>(${altBlurb})</em>.
+                                               This highlights potential flexibility.`;
+                            scoresListUl.appendChild(altLi);
+                        }
+                    }
+                }
             });
+
 
             if(resultsContainer) resultsContainer.style.display = 'block';
             if(quizForm) quizForm.style.display = 'none';
-            if(introductionSection) introductionSection.style.display = 'none'; // Hide the "Please answer all questions below." paragraph
+            if(introductionPara) introductionPara.style.display = 'none';
+            if(document.getElementById('axis-title')) document.getElementById('axis-title').style.display = 'none'; // Hide "Welcome to the..."
 
             if(resultsContainer) resultsContainer.scrollIntoView({ behavior: 'smooth' });
-
         });
     } else {
         console.error("Quiz form element not found. Cannot attach submit listener.");
     }
 
     // --- Initialize ---
-    // console.log("About to call loadQuestions().");
-    if (typeof loadQuestions === "function") { // Ensure loadQuestions is defined
+    if (typeof loadQuestions === "function") {
         loadQuestions();
     } else {
         console.error("loadQuestions function is not defined!");
     }
-    // console.log("Finished calling loadQuestions().");
 });
