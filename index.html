@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ArcheMorph Personality Quiz</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="print-style.css" media="print"> <!-- For print-specific styles -->
+    <link rel="stylesheet" href="print-style.css" media="print">
 </head>
 <body>
     <header>
@@ -26,36 +26,30 @@
 
         <section id="results-section" style="display:none;">
             <h2>Your ArcheMorph Profile</h2>
-            <!-- Action Buttons for Results -->
             <div class="results-actions">
                 <button id="retakeQuizButton">Retake Quiz</button>
                 <button id="savePdfButton">Save as PDF / Print</button>
                 <button id="shareResultsButton">Share Archetype</button>
             </div>
 
-            <div id="printable-results-area"> <!-- Wrapper for content to be printed/saved -->
+            <div id="printable-results-area">
                 <p><strong>Full Archetype Name:</strong> <span id="result-full-name"></span></p>
                 <p><strong>Personality Code:</strong> <span id="result-code"></span></p>
 
                 <h3>Archetype Components:</h3>
-                <p><strong>Prefix:</strong> <span id="result-prefix-name"></span> - <span id="result-prefix-blurb"></span></p>
-                <p><strong>Core:</strong> <span id="result-core-name"></span> - <span id="result-core-blurb"></span></p>
-                <p><strong>Suffix:</strong> <span id="result-suffix-name"></span> - <span id="result-suffix-blurb"></span></p>
-                <p><strong>Qualifier:</strong> <span id="result-part4-name"></span> - <span id="result-part4-blurb"></span></p>
+                <p class="archetype-component"><strong>Prefix:</strong> <span id="result-prefix-name"></span> - <span id="result-prefix-blurb"></span></p>
+                <p class="archetype-component"><strong>Core:</strong> <span id="result-core-name"></span> - <span id="result-core-blurb"></span></p>
+                <p class="archetype-component"><strong>Suffix:</strong> <span id="result-suffix-name"></span> - <span id="result-suffix-blurb"></span></p>
+                <p class="archetype-component"><strong>Qualifier:</strong> <span id="result-part4-name"></span> - <span id="result-part4-blurb"></span></p>
 
-                <!-- Trait Scores & Descriptions will go into result-scores-list -->
                 <ul id="result-scores-list">
-                    <!-- Populated by JS -->
+                    <!-- Populated by JS for detailed trait scores -->
                 </ul>
-            </div> <!-- End of printable-results-area -->
+            </div>
 
-            <div id="alternatives-container">
-                <!-- This was in your original HTML, but the detailed traits are now in result-scores-list.
-                     You can repurpose or remove this if not used for something else. -->
-            </div>
-            <div id="detailed-breakdown-text">
-                <!-- If you have more narrative text, it can go here. -->
-            </div>
+            <!-- These were in your original HTML, can be removed if detailed traits cover their intent -->
+            <!-- <div id="alternatives-container"></div> -->
+            <!-- <div id="detailed-breakdown-text"></div> -->
         </section>
     </main>
 
