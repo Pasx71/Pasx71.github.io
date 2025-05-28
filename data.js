@@ -390,11 +390,11 @@ const PART4_QUALIFIER_MAP = {
     // Specific Na + Attachment
     "true,false,false,true,false": "Seeking-Validation",
     "true,false,false,false,true": "Assertive-Identity",
-    
+
     // Specific Ma + Attachment
     "false,true,false,true,false": "Cautious-Tactician",
     "false,true,false,false,true": "Guarded-Stance",
-    
+
     // Specific Ps + Attachment
     "false,false,true,true,false": "Impetuous-Current",
     "false,false,true,false,true": "Solitary-Strength",
@@ -418,14 +418,14 @@ const PART4_QUALIFIER_MAP = {
     "true,true,false,true,true": "Insightful-Edge",      // Na+, Ma+, Ax+, Av+
     "true,false,true,true,true": "Pragmatic-Realist",    // Na+, Ps+, Ax+, Av+
     "false,true,true,true,true": "Tenacious-Will",       // Ma+, Ps+, Ax+, Av+
-    
+
     // All High
     "true,true,true,true,true": "Dominant-Vector"
 };
 
 
-// Default names if a map lookup fails (from config.py name lists)
-const DEFAULT_PREFIX_MODIFIER = "Guiding"; // Or pick one
+// Default names if a map lookup fails
+const DEFAULT_PREFIX_MODIFIER = "Guiding";
 const DEFAULT_CORE_PERSONALITY = "Analyst";
 const DEFAULT_SUFFIX_MODIFIER = "Exploring";
 const DEFAULT_PART4_QUALIFIER = "Authentic-Presence";
