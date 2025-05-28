@@ -1,0 +1,81 @@
+/* print-style.css */
+body {
+    font-family: Georgia, serif; /* More print-friendly font */
+    font-size: 12pt;
+    line-height: 1.4;
+    color: #000;
+    background-color: #fff; /* Ensure white background for print */
+}
+
+header,
+footer,
+#quizForm,
+.results-actions,
+#alternatives-container, /* Hide elements not relevant for print */
+#detailed-breakdown-text:empty { /* Hide if empty */
+    display: none !important; /* Force hide */
+}
+
+main,
+#results-section,
+#printable-results-area {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important; /* Expand to full width for print */
+}
+
+#results-section {
+    display: block !important; /* Ensure results are visible for printing */
+}
+
+h1, h2, h3, p, li {
+    color: #000 !important; /* Ensure black text */
+}
+
+h1 {
+    font-size: 18pt;
+    text-align: center;
+    margin-bottom: 20px;
+}
+h2 {
+    font-size: 16pt;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+h3 {
+    font-size: 14pt;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+#result-scores-list {
+    margin-top: 10px;
+}
+
+#result-scores-list li {
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc; /* Lighter border for print */
+}
+
+/* Ensure alternative suggestions are still somewhat distinct but print well */
+.alternative-suggestion {
+    font-style: italic;
+    color: #333 !important;
+    margin-top: 5px;
+    padding-left: 15px;
+    border-left: 1px solid #999;
+    background-color: #f9f9f9 !important; /* Very light gray */
+    padding: 5px 5px 5px 10px;
+    font-size: 11pt;
+}
+.alternative-suggestion strong {
+    color: #000 !important;
+}
+
+/* Remove underlines from links if they appear on print and are not desired */
+a, a:visited {
+    text-decoration: none;
+    color: #000;
+}
