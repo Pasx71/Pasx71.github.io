@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const ma_pos = scores['Ma'] > MID_LIKERT_POINT;
         const ps_pos = scores['Ps'] > MID_LIKERT_POINT;
         const ax_pos = scores['Ax'] > MID_LIKERT_POINT;
-        const av_pos = scores['Av'] > MID_LERT_POINT; // Typo here was av_pos > MID_LERT_POINT
+        const av_pos = scores['Av'] > MID_LIKERT_POINT; 
         const key = `${na_pos},${ma_pos},${ps_pos},${ax_pos},${av_pos}`;
         return PART4_QUALIFIER_MAP[key] || DEFAULT_PART4_QUALIFIER;
     }
