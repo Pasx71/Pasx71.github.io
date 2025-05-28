@@ -1,9 +1,30 @@
 // script.js
 document.addEventListener('DOMContentLoaded', () => {
+    // DOM Element References
     const questionsContainer = document.getElementById('questions-container');
     const quizForm = document.getElementById('quizForm');
     const resultsContainer = document.getElementById('results-section');
-    const introductionPara = document.getElementById('quiz-section').querySelector('p'); // To hide "Please answer all questions below."
+    const quizIntroText = document.getElementById('quiz-intro-text'); // For hiding intro p
+    const axisTitleHeading = document.getElementById('axis-title'); // For hiding "Welcome..." h2
+
+    // Result Display Elements
+    const resultFullNameSpan = document.getElementById('result-full-name');
+    const resultCodeSpan = document.getElementById('result-code');
+    const resultPrefixNameSpan = document.getElementById('result-prefix-name');
+    const resultPrefixBlurbSpan = document.getElementById('result-prefix-blurb');
+    const resultCoreNameSpan = document.getElementById('result-core-name');
+    const resultCoreBlurbSpan = document.getElementById('result-core-blurb');
+    const resultSuffixNameSpan = document.getElementById('result-suffix-name');
+    const resultSuffixBlurbSpan = document.getElementById('result-suffix-blurb');
+    const resultPart4NameSpan = document.getElementById('result-part4-name');
+    const resultPart4BlurbSpan = document.getElementById('result-part4-blurb');
+    const scoresListUl = document.getElementById('result-scores-list');
+
+    // Action Buttons
+    const retakeQuizButton = document.getElementById('retakeQuizButton');
+    const savePdfButton = document.getElementById('savePdfButton');
+    const shareResultsButton = document.getElementById('shareResultsButton');
+
 
     // --- Helper: Load Questions into HTML ---
     function loadQuestions() {
@@ -71,36 +92,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Helper: Get Alternative Archetype Name Part ---
     function getAlternativeNamePartIfFlipped(originalScores, traitToFlip, determinationFunction) {
-        const flippedScores = { ...originalScores }; // Create a shallow copy
-
+        const flippedScores = { ...originalScores };
         if (originalScores[traitToFlip] <= MID_LIKERT_POINT) {
             flippedScores[traitToFlip] = MID_LIKERT_POINT + 0.01;
         } else {
             flippedScores[traitToFlip] = MID_LIKERT_POINT - 0.01;
         }
-
         const originalNamePart = determinationFunction(originalScores);
         const alternativeNamePart = determinationFunction(flippedScores);
-
-        if (alternativeNamePart !== originalNamePart) {
-            return alternativeNamePart;
-        }
-        return null;
+        return (alternativeNamePart !== originalNamePart) ? alternativeNamePart : null;
     }
 
-
-    // --- Logic from archetype_system.py (ported to JS) ---
+    // --- Core Logic Functions (calculateAllScores, generatePersonalityCode, determine..., generateArchetypeNmeParts) ---
     function calculateAllScores(userResponses) {
         const allCalculatedScores = {};
         for (const axisCode in QUESTIONS_BANK) {
             if (axisCode === 'M') continue;
             const responses = userResponses[axisCode];
             if (!responses) {
-                console.warn(`No responses for axis: ${axisCode} in userResponses, skipping calculation for it.`);
+                console.warn(`No responses for axis: ${axisCode} in userResponses during calculation. Skipping.`);
                 continue;
             }
             if (responses.length !== QUESTIONS_PER_STANDARD_AXIS) {
-                 console.error(`Expected ${QUESTIONS_PER_STANDARD_AXIS} for ${axisCode}, got ${responses.length}`);
+                 console.error(`Score Calc Error: Expected ${QUESTIONS_PER_STANDARD_AXIS} for ${axisCode}, got ${responses.length}`);
                  return null;
             }
             let currentAxisScoreSum = 0.0;
@@ -117,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (QUESTIONS_BANK['M'] && userResponses['M']) {
             const mResponses = userResponses['M'];
              if (mResponses.length !== QUESTIONS_FOR_MOTIVATIONAL_AXIS) {
-                console.error(`Expected ${QUESTIONS_FOR_MOTIVATIONAL_AXIS} for M, got ${mResponses.length}`);
+                console.error(`Score Calc Error: Expected ${QUESTIONS_FOR_MOTIVATIONAL_AXIS} for M, got ${mResponses.length}`);
                 return null;
             }
             const subScoresSum = {'H': 0.0, 'G': 0.0, 'R': 0.0};
@@ -126,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 let responseVal = parseFloat(mResponses[i]);
                 const subAxisKey = questionData.sub_axis;
                 if (!subAxisKey || !subScoresSum.hasOwnProperty(subAxisKey)) {
-                    console.error(`Invalid sub_axis '${subAxisKey}' for M question: ${questionData.text}`);
+                    console.error(`Score Calc Error: Invalid sub_axis '${subAxisKey}' for M question: ${questionData.text}`);
                     return;
                 }
                 if (questionData.reverse) {
@@ -139,17 +153,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (subScoresCount[subKey] > 0) {
                     allCalculatedScores[`M_${subKey}`] = subScoresSum[subKey] / subScoresCount[subKey];
                 } else {
-                    console.warn(`No Qs/resps for M sub-axis M_${subKey}. Score will be missing.`);
+                    console.warn(`Score Calc Warning: No Qs/resps for M sub-axis M_${subKey}. Score will be missing.`);
+                    allCalculatedScores[`M_${subKey}`] = NaN; // Assign NaN if score cannot be calculated
                 }
             }
         } else if (PRIMARY_AXIS_CODES_FOR_QUESTIONS.hasOwnProperty('M')) {
-             console.error("Motivational 'M' Qs expected but not found in responses/bank.");
+             console.error("Score Calc Error: Motivational 'M' Qs expected but not found in responses/bank.");
              return null;
         }
 
         for (const code of PERSONALITY_CODE_AXES_ORDER) {
             if (!(code in allCalculatedScores)) {
-                 console.error(`Internal Error: Score for axis '${code}' was not calculated.`);
+                 console.error(`Score Calc Error: Score for required axis '${code}' was not calculated.`);
                  return null;
             }
         }
@@ -160,8 +175,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let codeLetters = [];
         PERSONALITY_CODE_AXES_ORDER.forEach(axisCode => {
             const score = calculatedScores[axisCode];
-            if (score === undefined) {
-                console.error(`Score for '${axisCode}' not found for code gen.`);
+            if (score === undefined || isNaN(score)) { // Check for undefined or NaN
+                console.warn(`Code Gen Warning: Score for '${axisCode}' is undefined or NaN.`);
                 codeLetters.push('?');
                 return;
             }
@@ -202,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const ma_pos = scores['Ma'] > MID_LIKERT_POINT;
         const ps_pos = scores['Ps'] > MID_LIKERT_POINT;
         const ax_pos = scores['Ax'] > MID_LIKERT_POINT;
-        const av_pos = scores['Av'] > MID_LIKERT_POINT; // Corrected from MID_LERT_POINT
+        const av_pos = scores['Av'] > MID_LIKERT_POINT;
         const key = `${na_pos},${ma_pos},${ps_pos},${ax_pos},${av_pos}`;
         return PART4_QUALIFIER_MAP[key] || DEFAULT_PART4_QUALIFIER;
     }
@@ -213,6 +228,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const suffix = determineSuffixModifier(calculatedScores);
         const part4 = determinePart4Qualifier(calculatedScores);
         return { prefix, core, suffix, part4 };
+    }
+
+    // --- Event Listeners for Action Buttons ---
+    if (retakeQuizButton) {
+        retakeQuizButton.addEventListener('click', () => window.location.reload());
+    }
+    if (savePdfButton) {
+        savePdfButton.addEventListener('click', () => window.print());
+    }
+    if (shareResultsButton) {
+        shareResultsButton.addEventListener('click', () => {
+            const archetypeFullName = resultFullNameSpan.textContent;
+            const personalityCode = resultCodeSpan.textContent;
+            const siteUrl = window.location.origin + window.location.pathname; // Cleaner URL
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My ArcheMorph Personality',
+                    text: `I discovered my ArcheMorph type: ${archetypeFullName} (Code: ${personalityCode})! Find yours:`,
+                    url: siteUrl,
+                }).catch((error) => console.warn('Share API error:', error));
+            } else {
+                const shareText = `I discovered my ArcheMorph type: ${archetypeFullName} (Code: ${personalityCode})! Find yours at ${siteUrl}`;
+                prompt("Share your Archetype! Copy this text:", shareText);
+            }
+        });
     }
 
     // --- Main Quiz Submission Handler ---
@@ -231,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(userResponses[axisCode] !== undefined){
                      userResponses[axisCode].push(parseInt(value));
                 } else {
-                    console.warn(`Unexpected form key: ${key} (axis ${axisCode})`);
+                    console.warn(`Unexpected form key during response collation: ${key} (axis ${axisCode})`);
                 }
             }
 
@@ -245,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const calculatedScores = calculateAllScores(userResponses);
             if (!calculatedScores) {
-                alert("Error calculating scores. Check console.");
+                alert("An error occurred while calculating scores. Please check the console for more details.");
                 return;
             }
 
@@ -254,67 +295,75 @@ document.addEventListener('DOMContentLoaded', () => {
             const fullArchetypeName = `${nameParts.prefix} ${nameParts.core} ${nameParts.suffix} with ${nameParts.part4}`;
 
             // Display Main Archetype Info
-            document.getElementById('result-full-name').textContent = fullArchetypeName;
-            document.getElementById('result-code').textContent = personalityCode;
-            document.getElementById('result-prefix-name').textContent = nameParts.prefix;
-            document.getElementById('result-prefix-blurb').textContent = PREFIX_MODIFIERS_BLURBS[nameParts.prefix] || "N/A";
-            document.getElementById('result-core-name').textContent = nameParts.core;
-            document.getElementById('result-core-blurb').textContent = CORE_PERSONALITIES_BLURBS[nameParts.core] || "N/A";
-            document.getElementById('result-suffix-name').textContent = nameParts.suffix;
-            document.getElementById('result-suffix-blurb').textContent = SUFFIX_MODIFIERS_BLURBS[nameParts.suffix] || "N/A";
-            document.getElementById('result-part4-name').textContent = nameParts.part4;
-            document.getElementById('result-part4-blurb').textContent = PART4_QUALIFIERS_BLURBS[nameParts.part4] || "N/A";
+            resultFullNameSpan.textContent = fullArchetypeName;
+            resultCodeSpan.textContent = personalityCode;
+            resultPrefixNameSpan.textContent = nameParts.prefix;
+            resultPrefixBlurbSpan.textContent = PREFIX_MODIFIERS_BLURBS[nameParts.prefix] || "Blurb N/A";
+            resultCoreNameSpan.textContent = nameParts.core;
+            resultCoreBlurbSpan.textContent = CORE_PERSONALITIES_BLURBS[nameParts.core] || "Blurb N/A";
+            resultSuffixNameSpan.textContent = nameParts.suffix;
+            resultSuffixBlurbSpan.textContent = SUFFIX_MODIFIERS_BLURBS[nameParts.suffix] || "Blurb N/A";
+            resultPart4NameSpan.textContent = nameParts.part4;
+            resultPart4BlurbSpan.textContent = PART4_QUALIFIERS_BLURBS[nameParts.part4] || "Blurb N/A";
 
             // Display Detailed Trait Scores & Blurbs
-            const scoresListUl = document.getElementById('result-scores-list');
-            scoresListUl.innerHTML = '<h3>Understanding Your Traits:</h3>'; // Add a sub-heading
+            scoresListUl.innerHTML = '<h3>Understanding Your Traits:</h3>';
 
             PERSONALITY_CODE_AXES_ORDER.forEach(code => {
                 const score = calculatedScores[code];
+                if (score === undefined || isNaN(score)) {
+                    console.warn(`Skipping display for trait ${code} due to missing/NaN score.`);
+                    return; // Skip this trait if score is bad
+                }
+
                 const traitFullName = ALL_SCORABLE_AXES_DEFINITIONS[code] || code;
                 let scoreDirection = "";
                 let traitBlurbText = "";
 
-                const traitSpecificBlurbs = TRAIT_DESCRIPTIONS ? TRAIT_DESCRIPTIONS[code] : null;
+                const traitSpecificBlurbs = (typeof TRAIT_DESCRIPTIONS === 'object' && TRAIT_DESCRIPTIONS !== null) ? TRAIT_DESCRIPTIONS[code] : null;
 
                 if (score > MID_LIKERT_POINT + GRAY_AREA_DELTA) {
                     scoreDirection = "High";
-                    traitBlurbText = traitSpecificBlurbs ? traitSpecificBlurbs.high : "High score blurb unavailable.";
+                    traitBlurbText = traitSpecificBlurbs && traitSpecificBlurbs.High ? traitSpecificBlurbs.High : "High score blurb unavailable.";
                 } else if (score < MID_LIKERT_POINT - GRAY_AREA_DELTA) {
                     scoreDirection = "Low";
-                    traitBlurbText = traitSpecificBlurbs ? traitSpecificBlurbs.low : "Low score blurb unavailable.";
+                    traitBlurbText = traitSpecificBlurbs && traitSpecificBlurbs.Low ? traitSpecificBlurbs.Low : "Low score blurb unavailable.";
                 } else {
                     scoreDirection = "Moderate";
-                    traitBlurbText = traitSpecificBlurbs ? traitSpecificBlurbs.moderate : "Moderate score blurb unavailable.";
+                    traitBlurbText = traitSpecificBlurbs && traitSpecificBlurbs.Moderate ? traitSpecificBlurbs.Moderate : "Moderate score blurb unavailable.";
                 }
 
                 const li = document.createElement('li');
-                li.innerHTML = `<strong>${traitFullName} (${code}): ${score.toFixed(2)} (${scoreDirection})</strong><br>${traitBlurbText}`;
+                // Wrap blurb in a span for better CSS targeting if needed
+                li.innerHTML = `<strong>${traitFullName} (${code}): ${score.toFixed(2)} (${scoreDirection})</strong><br><span class="trait-description-text">${traitBlurbText}</span>`;
                 scoresListUl.appendChild(li);
 
-                // Handle Moderate Score - Suggest Alternative Archetype Name Part
-                if (scoreDirection === "Moderate" && TRAIT_GROUPINGS && typeof getAlternativeNamePartIfFlipped === 'function') {
+                if (scoreDirection === "Moderate" &&
+                    (typeof TRAIT_GROUPINGS === 'object' && TRAIT_GROUPINGS !== null) &&
+                    typeof getAlternativeNamePartIfFlipped === 'function') {
+
                     let affectedDeterminationFunction = null;
                     let originalNamePartForTraitStr = null;
                     let namePartLabel = "";
                     let blurbDictionaryForAlt = null;
 
-                    if (TRAIT_GROUPINGS.group1 && TRAIT_GROUPINGS.group1.codes.includes(code)) {
+                    // Check each group and if codes array exists
+                    if (TRAIT_GROUPINGS.group1 && TRAIT_GROUPINGS.group1.codes && TRAIT_GROUPINGS.group1.codes.includes(code)) {
                         affectedDeterminationFunction = determineCorePersonality;
                         originalNamePartForTraitStr = nameParts.core;
                         namePartLabel = "Core Personality";
                         blurbDictionaryForAlt = CORE_PERSONALITIES_BLURBS;
-                    } else if (TRAIT_GROUPINGS.group2 && TRAIT_GROUPINGS.group2.codes.includes(code)) {
+                    } else if (TRAIT_GROUPINGS.group2 && TRAIT_GROUPINGS.group2.codes && TRAIT_GROUPINGS.group2.codes.includes(code)) {
                         affectedDeterminationFunction = determineSuffixModifier;
                         originalNamePartForTraitStr = nameParts.suffix;
                         namePartLabel = "Suffix Modifier";
                         blurbDictionaryForAlt = SUFFIX_MODIFIERS_BLURBS;
-                    } else if (TRAIT_GROUPINGS.group3 && TRAIT_GROUPINGS.group3.codes.includes(code)) {
+                    } else if (TRAIT_GROUPINGS.group3 && TRAIT_GROUPINGS.group3.codes && TRAIT_GROUPINGS.group3.codes.includes(code)) {
                         affectedDeterminationFunction = determinePrefixModifier;
                         originalNamePartForTraitStr = nameParts.prefix;
                         namePartLabel = "Prefix Modifier";
                         blurbDictionaryForAlt = PREFIX_MODIFIERS_BLURBS;
-                    } else if (TRAIT_GROUPINGS.group4 && TRAIT_GROUPINGS.group4.codes.includes(code)) {
+                    } else if (TRAIT_GROUPINGS.group4 && TRAIT_GROUPINGS.group4.codes && TRAIT_GROUPINGS.group4.codes.includes(code)) {
                         affectedDeterminationFunction = determinePart4Qualifier;
                         originalNamePartForTraitStr = nameParts.part4;
                         namePartLabel = "Qualifier";
@@ -326,15 +375,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             calculatedScores, code, affectedDeterminationFunction
                         );
                         if (alternativeNamePart && alternativeNamePart !== originalNamePartForTraitStr) {
-                            const altBlurb = blurbDictionaryForAlt[alternativeNamePart] || "Alt blurb N/A.";
+                            const altBlurb = (typeof blurbDictionaryForAlt === 'object' && blurbDictionaryForAlt !== null) ? (blurbDictionaryForAlt[alternativeNamePart] || "Alt blurb N/A.") : "Alt blurb dict N/A.";
                             const altLi = document.createElement('li');
-                            altLi.style.paddingLeft = "20px";
-                            altLi.style.fontStyle = "italic";
-                            altLi.style.marginTop = "5px";
-                            altLi.style.color = "#555";
+                            altLi.classList.add('alternative-suggestion-item'); // Add class for CSS
                             altLi.innerHTML = `↪ Because your ${traitFullName} score is moderate, if it leaned differently,
                                                your '${namePartLabel}' could also be expressed as
-                                               '<strong>${alternativeNamePart}</strong>' <em>(${altBlurb})</em>.
+                                               <strong>${alternativeNamePart}</strong> <em>(${altBlurb})</em>.
                                                This highlights potential flexibility.`;
                             scoresListUl.appendChild(altLi);
                         }
@@ -342,22 +388,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-
+            // Show/Hide UI sections
             if(resultsContainer) resultsContainer.style.display = 'block';
             if(quizForm) quizForm.style.display = 'none';
-            if(introductionPara) introductionPara.style.display = 'none';
-            if(document.getElementById('axis-title')) document.getElementById('axis-title').style.display = 'none'; // Hide "Welcome to the..."
+            // Hiding parent section hides children, but being explicit is fine:
+            // if(quizIntroText) quizIntroText.style.display = 'none';
+            // if(axisTitleHeading) axisTitleHeading.style.display = 'none';
 
             if(resultsContainer) resultsContainer.scrollIntoView({ behavior: 'smooth' });
         });
     } else {
-        console.error("Quiz form element not found. Cannot attach submit listener.");
+        console.error("Quiz form element (#quizForm) not found. Cannot attach submit listener.");
     }
 
-    // --- Initialize ---
+    // --- Initialize Quiz ---
     if (typeof loadQuestions === "function") {
         loadQuestions();
     } else {
-        console.error("loadQuestions function is not defined!");
+        console.error("CRITICAL: loadQuestions function is not defined!");
     }
 });
