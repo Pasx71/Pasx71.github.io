@@ -12,19 +12,26 @@
     </header>
 
     <main>
-        <section id="quiz-section">
-            <h2 id="axis-title">Axis Title</h2>
-            <div id="questions-container">
-                <!-- Questions will be loaded here by JavaScript -->
-            </div>
-            <button id="next-axis-button">Next</button>
-        </section>
+        <!-- ****** ADD THE FORM TAG HERE ****** -->
+        <form id="quizForm"> 
+            <section id="quiz-section">
+                <h2 id="axis-title">Welcome to the ArcheMorph Quiz!</h2> <!-- Changed title slightly -->
+                <p>Please answer all questions below.</p>
+                <div id="questions-container">
+                    <!-- Questions will be loaded here by JavaScript -->
+                    <!-- Your script.js already populates this based on PRIMARY_AXIS_CODES_FOR_QUESTIONS -->
+                </div>
+                <!-- Change this button to be the submit button for the form -->
+                <button type="submit" id="submitButton">Get My Archetype</button> 
+            </section>
+        </form> <!-- ****** CLOSE THE FORM TAG HERE ****** -->
+
 
         <section id="results-section" style="display:none;">
             <h2>Your ArcheMorph Profile</h2>
             <p><strong>Full Archetype Name:</strong> <span id="result-full-name"></span></p>
             <p><strong>Personality Code:</strong> <span id="result-code"></span></p>
-            
+
             <h3>Archetype Components:</h3>
             <p><strong>Prefix:</strong> <span id="result-prefix-name"></span> - <span id="result-prefix-blurb"></span></p>
             <p><strong>Core:</strong> <span id="result-core-name"></span> - <span id="result-core-blurb"></span></p>
@@ -39,7 +46,7 @@
             <ul id="result-scores-list">
                 <!-- Scores will be listed here -->
             </ul>
-            
+
             <div id="detailed-breakdown-text">
                 <!-- More detailed text can go here -->
             </div>
@@ -50,6 +57,8 @@
         <p>© ArcheMorph System</p>
     </footer>
 
+    <!-- ***** MAKE SURE data.js is loaded BEFORE script.js ***** -->
+    <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
