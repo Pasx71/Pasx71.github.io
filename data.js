@@ -221,34 +221,208 @@ const QUESTIONS_BANK = {
 };
 
 // --- Blurbs (from blurbs.py) ---
-const PREFIX_MODIFIERS_BLURBS = { /* Copy-paste from your blurbs.py */ };
-const CORE_PERSONALITIES_BLURBS = { /* ... */ };
-const SUFFIX_MODIFIERS_BLURBS = { /* ... */ };
-const PART4_QUALIFIERS_BLURBS = { /* ... */ };
-// Example:
-PREFIX_MODIFIERS_BLURBS["Vanguarding"] = "Leads with a bold, forward-thinking approach...";
-// ... (populate all blurbs)
+const PREFIX_MODIFIERS_BLURBS = {
+    "Vanguarding": "Leads with a bold, forward-thinking approach, often pushing boundaries, taking initiative, and venturing into new territory with energetic drive.",
+    "Inspiring": "Motivates and uplifts others through vision, empathy, and encouragement, fostering enthusiasm and collective action towards a shared purpose.",
+    "Challenging": "Questions the status quo by testing limits or through direct confrontation, aiming to provoke growth, assert boundaries, or drive change.",
+    "Advancing": "Systematically progresses goals with determination and focused action, overcoming obstacles to achieve forward momentum.",
+    "Guiding": "Offers direction, wisdom, and support to others, helping them navigate complexities and find their path with a clear, often principled approach.",
+    "Transforming": "Acts as a catalyst for significant change and development, reshaping situations, perspectives, or systems through impactful intervention.",
+    "Pioneering": "Ventures into uncharted territories with courage and an innovative spirit, establishing new methods, ideas, or pathways.",
+    "Nurturing": "Fosters growth, well-being, and potential in others through care, support, and encouragement, creating a supportive environment.",
+    "Driving": "Propels action with intense energy and a relentless focus on outcomes, often characterized by a powerful, forward-moving force.",
+    "Persuading": "Influences others' thoughts, feelings, or actions through reasoned argument, emotional appeal, or compelling presence.",
+    "Asserting": "Clearly and confidently expresses needs, opinions, and boundaries, standing firm in their position without undue aggression.",
+    "Unifying": "Brings together diverse elements or individuals, fostering cohesion, collaboration, and shared understanding towards a common goal.",
+    "Dynamic": "Displays vigorous activity and a forceful, energetic style, often adapting quickly and making a notable impact.",
+    "Resolute": "Shows unwavering determination and firmness of purpose, maintaining their course despite difficulties or opposition.",
+    "Empowering": "Enables and encourages others to realize their own strength, potential, and autonomy, often by delegating or fostering self-belief.",
+    "Directing": "Provides clear, focused leadership and instruction, organizing efforts and guiding actions towards specific, well-defined objectives."
+};
+
+const CORE_PERSONALITIES_BLURBS = {
+    "Architect": "A strategic and imaginative thinker who excels at creating complex systems, plans, and innovative solutions with foresight and precision.",
+    "Sentinel": "A reliable, observant, and dutiful individual dedicated to maintaining order, upholding standards, and ensuring stability and security.",
+    "Mediator": "An empathetic, idealistic, and diplomatic individual who seeks harmony and understanding, often working to reconcile differing perspectives.",
+    "Commander": "A decisive, strategic, and assertive leader who confidently takes charge, organizes effectively, and drives towards ambitious goals.",
+    "Advocate": "A principled and compassionate individual driven by strong convictions to speak up for others and champion meaningful causes.",
+    "Virtuoso": "A hands-on, practical, and resourceful individual who excels at mastering tools and skills, often with an adaptable and experimental approach.",
+    "Logician": "A deeply analytical and inventive thinker, fascinated by logical systems, abstract concepts, and the pursuit of knowledge and truth.",
+    "Executive": "An organized, decisive, and efficient individual who excels at managing people and processes, implementing plans, and achieving tangible results.",
+    "Harmonizer": "A warm, cooperative, and supportive individual who prioritizes interpersonal accord, fosters positive relationships, and creates a sense of community.",
+    "Explorer": "An adventurous, energetic, and spontaneous individual who thrives on new experiences, variety, and the freedom to discover.",
+    "Stabilizer": "A calm, consistent, and pragmatic presence who provides a sense of security and order, ensuring reliability and steady progress.",
+    "Analyst": "A methodical, objective, and detail-oriented individual who excels at dissecting information, identifying patterns, and drawing logical conclusions.",
+    "Catalyst": "An energetic and influential individual who initiates change, sparks new ideas, and motivates others to action, often challenging norms.",
+    "Guardian": "A protective, responsible, and conscientious individual committed to safeguarding values, traditions, and the well-being of their community.",
+    "Pragmatist": "A sensible, resourceful, and results-oriented individual who focuses on practical solutions and what works effectively in the real world.",
+    "Idealist": "A visionary and principled individual, deeply committed to their values and a better future, often inspiring hope and striving for positive change."
+};
+
+const SUFFIX_MODIFIERS_BLURBS = {
+    "Analyzing": "Approaches information with a logical, systematic, and in-depth cognitive style, adept at deconstructing complex problems.",
+    "Reflecting": "Engages in deep introspection and thoughtful consideration, processing experiences and ideas internally before forming conclusions.",
+    "Imagining": "Utilizes a creative and conceptual cognitive style, readily envisioning possibilities, alternatives, and novel ideas.",
+    "Exploring": "Possesses an active and curious cognitive style, driven to seek out new information, experiences, and diverse perspectives, even within known boundaries if external openness is lower.",
+    "Synthesizing": "Excels at integrating diverse ideas and information into new, coherent wholes, seeing patterns and connections.",
+    "Structuring": "Prefers to organize information and concepts into clear frameworks and logical systems, bringing order to complexity.",
+    "Conceptualizing": "Thinks in abstract terms, adept at forming theories, understanding broad principles, and grasping intangible ideas.",
+    "Perceiving": "Maintains an open, receptive, and often intuitive cognitive stance, attuned to nuances and absorbing a wide range of sensory or emotional data."
+};
+
+const PART4_QUALIFIERS_BLURBS = {
+    "Authentic-Presence": "Interacts with genuineness and transparency, with a core identity largely free from manipulative, grandiose, or insecure relational patterns.",
+    "Independent-Resolve": "Demonstrates a firm commitment to self-reliance and emotional autonomy, preferring to navigate life with personal strength and less dependence on deep intimacy.",
+    "Relational-Anchor": "Deeply values and seeks secure, close connections, often investing considerable emotional energy into maintaining important bonds and needing reassurance.",
+    "Vigilant-Awareness": "Maintains a heightened alertness to social cues and relational dynamics, driven by a complex interplay of needing connection yet fearing vulnerability.",
+    "Daring-Spirit": "Embraces risk, novelty, and excitement with an adventurous and often impulsive approach, sometimes with less regard for conventional consequences.",
+    "Solitary-Strength": "Finds comfort and effectiveness in independence, often taking a detached, risk-tolerant path and relying on inner resources.",
+    "Impetuous-Current": "Characterized by a tendency towards spontaneous actions in relationships, sometimes driven by impulsive emotional needs or reactions to perceived threats to connection.",
+    "Rebellious-Heart": "Navigates relationships with a non-conformist and often conflicted style, challenging norms while simultaneously experiencing complex attachment needs.",
+    "Strategic-Acumen": "Possesses a sharp ability to plan and maneuver effectively in social situations, often with foresight into interpersonal dynamics and outcomes.",
+    "Guarded-Stance": "Maintains a cautious, distrustful, and self-protective approach to relationships, preferring emotional distance and strategic self-reliance.",
+    "Cautious-Tactician": "Employs careful strategy and planning in social interactions, often driven by a need to manage relational anxieties and ensure favorable outcomes.",
+    "Warying-Mind": "Approaches relationships with significant distrust and caution, often anticipating negative intentions while managing complex internal needs for both closeness and independence.",
+    "Calculated-Engagement": "Interacts socially with forethought, strategic consideration, and a degree of emotional detachment, often weighing potential gains and risks.",
+    "Detached-Observer": "Tends to view social situations and emotional expressions from an objective, sometimes emotionally distant and strategic standpoint, often preferring independence.",
+    "Tenacious-Grip": "Pursues goals or maintains relational positions with intense, strategic, and sometimes impulsive persistence, potentially driven by underlying anxieties.",
+    "Tenacious-Will": "Exhibits powerful, multifaceted determination in pursuing aims, driven by a complex interplay of strategic thinking, impulsivity, and deep-seated relational needs.",
+    "Self-Possessed": "Exhibits a strong sense of self, confidence, and self-focus, often comfortable taking center stage and prioritizing personal ambitions.",
+    "Assertive-Identity": "Clearly defines and upholds their sense of self and personal entitlements with confidence, often maintaining independence and a strong personal direction.",
+    "Seeking-Validation": "Often looks to others for approval, admiration, and reassurance, with self-esteem and relational security closely tied to external feedback.",
+    "Defensive-Presence": "Manages a self-focused identity alongside complex attachment needs (both anxious and avoidant), often resulting in protective or defensive interpersonal behaviors.",
+    "Charming-Facade": "Often presents an engaging, likable, and persuasive exterior that can effectively attract attention and influence, though it may mask other underlying motives or a degree of impulsivity.",
+    "Stoic-Reserve": "Maintains a composed, often self-possessed and emotionally detached exterior, navigating social risks with a degree of calculated independence.",
+    "Unconventional-Lens": "Perceives and acts with a unique, attention-seeking, and often impulsive style, sometimes driven by anxious needs for connection or validation in non-standard ways.",
+    "Pragmatic-Realist": "Navigates their complex internal landscape of self-focus, impulsivity, and varied attachment needs with a practical focus on what works for them in the moment.",
+    "Ambitious-Self": "Driven by a strong need for achievement and recognition, strategically pursuing personal advancement and status with confidence.",
+    "Dominant-Influence": "Asserts a confident, strategic, and independent leadership style, comfortable directing others and shaping outcomes to fit their vision.",
+    "Magnetic-Influence": "Combines strategic charm with a relational drive for approval, capably drawing others in and influencing situations to meet personal and relational goals.",
+    "Insightful-Edge": "Possesses a keen, often strategic, understanding of social dynamics, born from navigating a complex interplay of self-interest and multifaceted attachment needs.",
+    "Exploitative-Intellect": "May utilize a sharp intellect, charm, and strategic thinking to manipulate situations or people for personal gain, often with a degree of detachment.",
+    "Assertive-Stance": "Forcefully maintains their position and independence, driven by a potent combination of self-assurance, strategic thinking, and disregard for conventional constraints.",
+    "Intense-Drive": "Characterized by a powerful and complex motivational force, stemming from high self-focus, strategic intent, impulsivity, and anxious relational energy.",
+    "Dominant-Vector": "Represents an extremely potent and multifaceted personality, where high levels of self-focus, strategic thinking, impulsivity, and complex attachment needs create a strong, often overwhelming, directional force."
+};
 
 // --- Naming Maps (from naming_rules.py) ---
 // For JS, map keys from tuples of booleans to strings like "true,false,true,false"
 const CORE_PERSONALITY_MAP = {
+    // N Negative (Stable leaning)
     "true,true,true,false": "Executive",
     "true,true,false,false": "Harmonizer",
-    // ... (populate all 16 from initialize_core_personality_map)
+    "true,false,true,false": "Commander",
+    "true,false,false,false": "Pragmatist",
+    "false,true,true,false": "Sentinel",
+    "false,true,false,false": "Idealist",
+    "false,false,true,false": "Architect",
+    "false,false,false,false": "Analyst",
+
+    // N Positive (Neuroticism/Sensitivity leaning)
+    "true,true,true,true": "Catalyst",
+    "true,true,false,true": "Explorer",
+    "true,false,true,true": "Stabilizer",
+    "true,false,false,true": "Virtuoso",
+    "false,true,true,true": "Advocate",
+    "false,true,false,true": "Mediator",
+    "false,false,true,true": "Logician",
+    "false,false,false,true": "Guardian"
 };
+
 const SUFFIX_MODIFIER_MAP = {
     "true,true,true": "Conceptualizing",
-    // ... (populate all 8 from initialize_suffix_modifier_map)
+    "true,true,false": "Analyzing",
+    "true,false,true": "Synthesizing",
+    "true,false,false": "Imagining",
+    "false,true,true": "Structuring",
+    "false,true,false": "Reflecting",
+    "false,false,true": "Perceiving",
+    "false,false,false": "Exploring"
 };
+
 const PREFIX_MODIFIER_MAP = {
+    // Ag Negative
     "false,false,false,false": "Guiding",
-    // ... (populate all 16 from initialize_prefix_modifier_map)
+    "false,false,true,false": "Asserting",
+    "false,true,false,false": "Nurturing",
+    "false,true,true,false": "Inspiring",
+    "true,false,false,false": "Dynamic",
+    "true,false,true,false": "Vanguarding",
+    "true,true,false,false": "Empowering",
+    "true,true,true,false": "Advancing",
+
+    // Ag Positive
+    "false,false,false,true": "Challenging",
+    "false,false,true,true": "Directing",
+    "false,true,false,true": "Persuading",
+    "false,true,true,true": "Unifying",
+    "true,false,false,true": "Driving",
+    "true,false,true,true": "Pioneering",
+    "true,true,false,true": "Resolute",
+    "true,true,true,true": "Transforming"
 };
+
 const PART4_QUALIFIER_MAP = {
+    // Pattern: (na_pos, ma_pos, ps_pos, ax_pos, av_pos)
+    // Keys: "na,ma,ps,ax,av" (true/false strings)
+
+    // All Low (Secure, Authentic)
     "false,false,false,false,false": "Authentic-Presence",
-    // ... (populate all 32 from initialize_part4_qualifier_map, including your filler logic if necessary)
-    // Or, if the filler logic is too complex, ensure all 32 are manually mapped.
+
+    // Single Highs
+    "true,false,false,false,false": "Self-Possessed",
+    "false,true,false,false,false": "Strategic-Acumen",
+    "false,false,true,false,false": "Daring-Spirit",
+    "false,false,false,true,false": "Relational-Anchor",
+    "false,false,false,false,true": "Independent-Resolve",
+
+    // Dark Triad Pairs (Attachment Low)
+    "true,true,false,false,false": "Ambitious-Self",
+    "true,false,true,false,false": "Charming-Facade",
+    "false,true,true,false,false": "Calculated-Engagement",
+
+    // Attachment Pair (Dark Triad Low)
+    "false,false,false,true,true": "Vigilant-Awareness",
+
+    // Dark Triad All High (Attachment Low)
+    "true,true,true,false,false": "Exploitative-Intellect",
+
+    // Specific Na + Attachment
+    "true,false,false,true,false": "Seeking-Validation",
+    "true,false,false,false,true": "Assertive-Identity",
+    
+    // Specific Ma + Attachment
+    "false,true,false,true,false": "Cautious-Tactician",
+    "false,true,false,false,true": "Guarded-Stance",
+    
+    // Specific Ps + Attachment
+    "false,false,true,true,false": "Impetuous-Current",
+    "false,false,true,false,true": "Solitary-Strength",
+
+    // Three Highs - Two Dark Triad + One Attachment
+    "true,true,false,true,false": "Magnetic-Influence",   // Na+, Ma+, Ax+
+    "true,true,false,false,true": "Dominant-Influence",   // Na+, Ma+, Av+
+    "true,false,true,true,false": "Unconventional-Lens",  // Na+, Ps+, Ax+
+    "true,false,true,false,true": "Stoic-Reserve",        // Na+, Ps+, Av+
+    "false,true,true,true,false": "Tenacious-Grip",       // Ma+, Ps+, Ax+
+    "false,true,true,false,true": "Detached-Observer",    // Ma+, Ps+, Av+
+
+    // Three Highs - One Dark Triad + Both Attachment Anxious & Avoidant (Fearful)
+    "true,false,false,true,true": "Defensive-Presence",   // Na+, Ax+, Av+
+    "false,true,false,true,true": "Warying-Mind",         // Ma+, Ax+, Av+
+    "false,false,true,true,true": "Rebellious-Heart",     // Ps+, Ax+, Av+
+
+    // Four Highs
+    "true,true,true,true,false": "Intense-Drive",        // Dark Triad high, Ax+
+    "true,true,true,false,true": "Assertive-Stance",     // Dark Triad high, Av+
+    "true,true,false,true,true": "Insightful-Edge",      // Na+, Ma+, Ax+, Av+
+    "true,false,true,true,true": "Pragmatic-Realist",    // Na+, Ps+, Ax+, Av+
+    "false,true,true,true,true": "Tenacious-Will",       // Ma+, Ps+, Ax+, Av+
+    
+    // All High
+    "true,true,true,true,true": "Dominant-Vector"
 };
+
 
 // Default names if a map lookup fails (from config.py name lists)
 const DEFAULT_PREFIX_MODIFIER = "Guiding"; // Or pick one
