@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const questionsContainer = document.getElementById('questions-container');
     const quizForm = document.getElementById('quizForm');
     const resultsContainer = document.getElementById('results-section');
-    const quizIntroText = document.getElementById('quiz-intro-text'); // For hiding intro p
-    const axisTitleHeading = document.getElementById('axis-title'); // For hiding "Welcome..." h2
+    const quizIntroText = document.getElementById('quiz-intro-text');
+    const axisTitleHeading = document.getElementById('axis-title');
 
     // Result Display Elements
     const resultFullNameSpan = document.getElementById('result-full-name');
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        questionsContainer.innerHTML = ''; // Clear any existing content
+        questionsContainer.innerHTML = '';
 
         for (const axisCode in PRIMARY_AXIS_CODES_FOR_QUESTIONS) {
             if (QUESTIONS_BANK[axisCode]) {
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return (alternativeNamePart !== originalNamePart) ? alternativeNamePart : null;
     }
 
-    // --- Core Logic Functions (calculateAllScores, generatePersonalityCode, determine..., generateArchetypeNmeParts) ---
+    // --- Core Logic Functions ---
     function calculateAllScores(userResponses) {
         const allCalculatedScores = {};
         for (const axisCode in QUESTIONS_BANK) {
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     allCalculatedScores[`M_${subKey}`] = subScoresSum[subKey] / subScoresCount[subKey];
                 } else {
                     console.warn(`Score Calc Warning: No Qs/resps for M sub-axis M_${subKey}. Score will be missing.`);
-                    allCalculatedScores[`M_${subKey}`] = NaN; // Assign NaN if score cannot be calculated
+                    allCalculatedScores[`M_${subKey}`] = NaN;
                 }
             }
         } else if (PRIMARY_AXIS_CODES_FOR_QUESTIONS.hasOwnProperty('M')) {
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let codeLetters = [];
         PERSONALITY_CODE_AXES_ORDER.forEach(axisCode => {
             const score = calculatedScores[axisCode];
-            if (score === undefined || isNaN(score)) { // Check for undefined or NaN
+            if (score === undefined || isNaN(score)) {
                 console.warn(`Code Gen Warning: Score for '${axisCode}' is undefined or NaN.`);
                 codeLetters.push('?');
                 return;
@@ -240,17 +240,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (shareResultsButton) {
         shareResultsButton.addEventListener('click', () => {
             const archetypeFullName = resultFullNameSpan.textContent;
-            const personalityCode = resultCodeSpan.textContent;
-            const siteUrl = window.location.origin + window.location.pathname; // Cleaner URL
+            // const personalityCode = resultCodeSpan.textContent; // No longer used in share text
+            const siteUrl = window.location.origin + window.location.pathname;
 
             if (navigator.share) {
                 navigator.share({
                     title: 'My ArcheMorph Personality',
-                    text: `I discovered my ArcheMorph type: ${archetypeFullName} (Code: ${personalityCode})! Find yours:`,
+                    text: `I discovered my ArcheMorph type: ${archetypeFullName}! Find out yours:`, // MODIFIED
                     url: siteUrl,
                 }).catch((error) => console.warn('Share API error:', error));
             } else {
-                const shareText = `I discovered my ArcheMorph type: ${archetypeFullName} (Code: ${personalityCode})! Find yours at ${siteUrl}`;
+                const shareText = `I discovered my ArcheMorph type: ${archetypeFullName}! Find out yours at ${siteUrl}`; // MODIFIED
                 prompt("Share your Archetype! Copy this text:", shareText);
             }
         });
@@ -294,7 +294,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const nameParts = generateArchetypeNmeParts(calculatedScores);
             const fullArchetypeName = `${nameParts.prefix} ${nameParts.core} ${nameParts.suffix} with ${nameParts.part4}`;
 
-            // Display Main Archetype Info
             resultFullNameSpan.textContent = fullArchetypeName;
             resultCodeSpan.textContent = personalityCode;
             resultPrefixNameSpan.textContent = nameParts.prefix;
@@ -306,20 +305,18 @@ document.addEventListener('DOMContentLoaded', () => {
             resultPart4NameSpan.textContent = nameParts.part4;
             resultPart4BlurbSpan.textContent = PART4_QUALIFIERS_BLURBS[nameParts.part4] || "Blurb N/A";
 
-            // Display Detailed Trait Scores & Blurbs
             scoresListUl.innerHTML = '<h3>Understanding Your Traits:</h3>';
 
             PERSONALITY_CODE_AXES_ORDER.forEach(code => {
                 const score = calculatedScores[code];
                 if (score === undefined || isNaN(score)) {
                     console.warn(`Skipping display for trait ${code} due to missing/NaN score.`);
-                    return; // Skip this trait if score is bad
+                    return;
                 }
 
                 const traitFullName = ALL_SCORABLE_AXES_DEFINITIONS[code] || code;
                 let scoreDirection = "";
                 let traitBlurbText = "";
-
                 const traitSpecificBlurbs = (typeof TRAIT_DESCRIPTIONS === 'object' && TRAIT_DESCRIPTIONS !== null) ? TRAIT_DESCRIPTIONS[code] : null;
 
                 if (score > MID_LIKERT_POINT + GRAY_AREA_DELTA) {
@@ -334,7 +331,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 const li = document.createElement('li');
-                // Wrap blurb in a span for better CSS targeting if needed
                 li.innerHTML = `<strong>${traitFullName} (${code}): ${score.toFixed(2)} (${scoreDirection})</strong><br><span class="trait-description-text">${traitBlurbText}</span>`;
                 scoresListUl.appendChild(li);
 
@@ -347,7 +343,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     let namePartLabel = "";
                     let blurbDictionaryForAlt = null;
 
-                    // Check each group and if codes array exists
                     if (TRAIT_GROUPINGS.group1 && TRAIT_GROUPINGS.group1.codes && TRAIT_GROUPINGS.group1.codes.includes(code)) {
                         affectedDeterminationFunction = determineCorePersonality;
                         originalNamePartForTraitStr = nameParts.core;
@@ -377,7 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (alternativeNamePart && alternativeNamePart !== originalNamePartForTraitStr) {
                             const altBlurb = (typeof blurbDictionaryForAlt === 'object' && blurbDictionaryForAlt !== null) ? (blurbDictionaryForAlt[alternativeNamePart] || "Alt blurb N/A.") : "Alt blurb dict N/A.";
                             const altLi = document.createElement('li');
-                            altLi.classList.add('alternative-suggestion-item'); // Add class for CSS
+                            altLi.classList.add('alternative-suggestion-item');
                             altLi.innerHTML = `↪ Because your ${traitFullName} score is moderate, if it leaned differently,
                                                your '${namePartLabel}' could also be expressed as
                                                <strong>${alternativeNamePart}</strong> <em>(${altBlurb})</em>.
@@ -388,12 +383,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Show/Hide UI sections
             if(resultsContainer) resultsContainer.style.display = 'block';
             if(quizForm) quizForm.style.display = 'none';
-            // Hiding parent section hides children, but being explicit is fine:
-            // if(quizIntroText) quizIntroText.style.display = 'none';
-            // if(axisTitleHeading) axisTitleHeading.style.display = 'none';
+            // if(quizIntroText) quizIntroText.style.display = 'none'; // Covered by quizForm hide
+            // if(axisTitleHeading) axisTitleHeading.style.display = 'none'; // Covered by quizForm hide
 
             if(resultsContainer) resultsContainer.scrollIntoView({ behavior: 'smooth' });
         });
