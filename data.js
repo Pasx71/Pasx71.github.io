@@ -423,6 +423,97 @@ const PART4_QUALIFIER_MAP = {
     "true,true,true,true,true": "Dominant-Vector"
 };
 
+const TRAIT_DESCRIPTIONS = {
+    // --- Group 1: Foundational Temperament & Self-Regulation ---
+    'E': { // Extraversion
+        "Low": "Prefers solitary activities or small, familiar groups. Gains energy from quiet time and reflection. May be perceived as reserved or private.",
+        "Moderate": "Balances social interaction with alone time effectively. Can enjoy both group settings and solitude, adapting to the situation.",
+        "High": "Feels energized by social interaction and being around others. Often outgoing, talkative, and enjoys being the center of attention or leading groups."
+    },
+    'A': { // Agreeableness
+        "Low": "Tends to be more competitive, skeptical, and assertive of own interests. May challenge others more readily and prioritize personal objectives.",
+        "Moderate": "Balances cooperativeness with self-interest. Can be agreeable and helpful but will also stand their ground when necessary.",
+        "High": "Is generally compassionate, cooperative, and trusting. Values harmony and tends to be helpful, considerate, and conflict-avoidant."
+    },
+    'C': { // Conscientiousness
+        "Low": "Prefers spontaneity and flexibility over strict plans. May be more impulsive, less organized, and sometimes procrastinate or miss details.",
+        "Moderate": "Balances organization with adaptability. Can be reliable and planful when needed but is also comfortable with some flexibility and spontaneity.",
+        "High": "Is typically organized, dependable, and self-disciplined. Prefers order, plans ahead, and is diligent in completing tasks thoroughly."
+    },
+    'N': { // Neuroticism
+        "Low": "Generally emotionally stable, calm, and resilient. Tends not to worry excessively and handles stress well. (Corresponds to High Emotional Stability).",
+        "Moderate": "Experiences a normal range of emotions and stress responses. Can be sensitive at times but generally maintains emotional balance.",
+        "High": "Tends to be emotionally sensitive, prone to experiencing anxiety, worry, or sadness more intensely or frequently. May react strongly to stressors."
+    },
+
+    // --- Group 2: Cognitive & Perceptual Style ---
+    'O': { // Openness
+        "Low": "Prefers familiar routines, practical matters, and conventional approaches. May be more down-to-earth and less interested in abstract ideas or novel experiences.",
+        "Moderate": "Is open to new ideas and experiences but also values tradition and practicality. Balances curiosity with a preference for the known.",
+        "High": "Is highly curious, imaginative, and appreciative of art, novelty, and variety. Enjoys exploring new ideas, values, and unconventional experiences."
+    },
+    'TF': { // Thinking/Feeling (Score on a spectrum)
+        // For TF, 'Low' means Feeling-dominant, 'High' means Thinking-dominant
+        "Low": "Tends to make decisions based on personal values, empathy, and the impact on others. Prioritizes harmony and emotional considerations. (Feeling-dominant)",
+        "Moderate": "Integrates both logic and emotion in decision-making. Considers both objective facts and personal values, adapting their approach.",
+        "High": "Tends to make decisions based on logic, objective analysis, and impartial principles. Prioritizes fairness and consistency over personal feelings. (Thinking-dominant)"
+    },
+    'M_H': { // Motivational Head
+        "Low": "Relies less on deep analysis or extensive information gathering before acting. May prefer more intuitive or action-oriented approaches.",
+        "Moderate": "Balances thinking and action. Engages in analysis when appropriate but is also comfortable acting on intuition or practical considerations.",
+        "High": "Is motivated by understanding, knowledge, and logical analysis. Prefers to think things through, gather information, and strategize before acting."
+    },
+
+    // --- Group 3: Drive, Action & Interpersonal Influence Style ---
+    'M_G': { // Motivational Gut
+        "Low": "Tends to be more cautious and deliberate in action. May prefer to avoid immediate confrontation or control, relying on other strengths.",
+        "Moderate": "Can act decisively from instinct when needed but also considers other factors. Balances gut feelings with planned approaches.",
+        "High": "Is motivated by instinct, decisiveness, and a desire for control or immediate impact. Tends to react quickly and assertively from a gut level."
+    },
+    'M_R': { // Motivational Heart
+        "Low": "Is less driven by deep emotional connections or empathic responses in their primary motivation. May focus more on tasks or logic.",
+        "Moderate": "Values relationships and empathy but also balances these with other motivations like logic or action. Connects when appropriate.",
+        "High": "Is motivated by empathy, compassion, and the desire for meaningful connections and positive impact on others. Values harmony and relational well-being."
+    },
+    'As': { // Assertiveness
+        "Low": "Tends to be more compliant, passive, or conflict-avoidant. May find it difficult to express own needs or opinions directly, especially under pressure.",
+        "Moderate": "Can express own needs and opinions when important but may not always take the lead or seek confrontation. Balances assertion with accommodation.",
+        "High": "Confidently expresses own opinions, needs, and boundaries. Is comfortable taking initiative, leading, and standing up for themselves."
+    },
+    'Ag': { // Aggressiveness
+        "Low": "Tends to be conflict-avoidant, patient, and less prone to anger or confrontational behavior. Prefers peaceful interactions.",
+        "Moderate": "Can express frustration or stand firm when provoked but generally maintains control and prefers non-aggressive approaches.",
+        "High": "May be quick to anger, prone to argument, or use a more forceful, confrontational, or intimidating style to achieve goals or express displeasure."
+    },
+
+    // --- Group 4: Complex Relational & Self-Identity Patterns ---
+    'Na': { // Narcissism
+        "Low": "Tends to be humble, less focused on self-admiration or seeking attention. May prioritize others' needs or a collective focus.",
+        "Moderate": "Has a healthy sense of self-esteem and confidence without an excessive need for admiration or entitlement. Balances self-focus with others' perspectives.",
+        "High": "Exhibits a strong focus on self, a need for admiration, and a sense of grandiosity or entitlement. May be charismatic but potentially lacking in empathy."
+    },
+    'Ma': { // Machiavellianism
+        "Low": "Tends to be trusting, sincere, and straightforward in dealings. Values honesty and is less inclined towards strategic manipulation.",
+        "Moderate": "Is aware of social dynamics and can be strategic when necessary, but generally prefers fair and direct interactions. Balances pragmatism with principles.",
+        "High": "Views others with a degree of cynicism and is inclined towards strategic manipulation, and a belief that ends can justify the means to achieve personal goals."
+    },
+    'Ps': { // Psychopathy (Primary psychopathy traits like impulsivity, low empathy)
+        "Low": "Tends to be empathetic, responsible, and risk-averse. Shows remorse for harmful actions and generally respects rules and others' feelings.",
+        "Moderate": "May exhibit some impulsivity or a degree of detachment but generally operates within social norms and shows concern for others.",
+        "High": "Characterized by impulsivity, thrill-seeking, lower empathy, and less remorse. May be charming but can also be callous or disregard rules and consequences."
+    },
+    'Ax': { // Attachment Anxiety
+        "Low": "Feels secure in relationships and generally does not worry excessively about abandonment or partner's affection. Comfortable with interdependence.",
+        "Moderate": "Experiences occasional relationship insecurities or needs for reassurance but generally maintains a balanced view of attachment and independence.",
+        "High": "Often worries about relationship security, fears abandonment, and may need frequent reassurance. Highly values closeness and can be sensitive to perceived threats to the bond."
+    },
+    'Av': { // Attachment Avoidance
+        "Low": "Is comfortable with emotional closeness, intimacy, and interdependence in relationships. Values connection and is open to vulnerability.",
+        "Moderate": "Values independence but is also capable of forming close bonds. Balances self-reliance with intimacy, sometimes needing space.",
+        "High": "Prefers emotional distance and self-reliance, often uncomfortable with deep intimacy or depending on others. Highly values independence and may suppress emotional needs."
+    }
+};
+
 
 // Default names if a map lookup fails
 const DEFAULT_PREFIX_MODIFIER = "Guiding";
