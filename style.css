@@ -1,326 +1,102 @@
-/* style.css */
-
-/* --- General Body & Page Structure --- */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     margin: 0;
-    padding: 20px;
-    background-color: #f4f7f6;
+    padding: 0;
+    background-color: #f4f4f4;
     color: #333;
-    font-size: 16px;
-}
-
-header, main, footer {
-    max-width: 800px;
-    margin: 20px auto;
-    background: #fff;
-    padding: 25px 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 header {
+    background: #333;
+    color: #fff;
+    padding: 1rem 0;
     text-align: center;
-    border-bottom: 1px solid #e0e0e0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+nav ul {
+    padding: 0;
+    list-style: none;
+    text-align: center;
+    background: #444;
+    margin:0;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: #fff;
+    padding: 1rem;
+    display: inline-block;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    background: #555;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+h2 {
+    color: #333;
+    border-bottom: 2px solid #f4f4f4;
+    padding-bottom: 10px;
+}
+
+h3 {
+    color: #444;
+    margin-top: 30px;
+}
+
+.button {
+    display: inline-block;
+    background: #5cb85c;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #4cae4c;
+}
+
+.archetype-section, .trait-section {
     margin-bottom: 30px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-left: 5px solid #5cb85c;
+}
+
+.archetype-section h4, .trait-section h4 {
+    margin-top: 0;
+    color: #555;
 }
 
 footer {
     text-align: center;
-    margin-top: 40px;
-    font-size: 0.9em;
-    color: #777;
-    padding: 15px;
-    background: none;
-    box-shadow: none;
-}
-
-/* --- Headings & Text --- */
-h1 {
-    color: #2c3e50;
-    margin-bottom: 0.5em;
-    font-size: 2em;
-}
-
-h2 {
-    color: #34495e;
-    margin-top: 1em;
-    margin-bottom: 0.8em;
-    font-size: 1.6em;
-    border-bottom: 1px solid #ecf0f1;
-    padding-bottom: 0.3em;
-}
-
-h3 {
-    color: #34495e;
-    margin-top: 1.5em;
-    margin-bottom: 0.7em;
-    font-size: 1.3em;
-}
-
-p {
-    margin-bottom: 1em;
-    color: #555;
-}
-
-/* --- Quiz Form Specifics --- */
-#quiz-section p#quiz-intro-text {
-    font-size: 1.1em;
-    color: #555;
-    margin-bottom: 20px;
-}
-
-.question-group {
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ecf0f1;
-}
-.question-group:last-of-type {
-    border-bottom: none;
-    padding-bottom: 0;
-    margin-bottom: 20px;
-}
-
-.question-item {
-    margin-bottom: 20px;
-}
-
-.question-item p {
-    margin-bottom: 10px;
-    font-weight: 500;
-    color: #2c3e50;
-    font-size: 1.05em;
-}
-
-.likert-scale {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 5px;
-    padding: 8px 5px;
-    background-color: #f9f9f9;
-    border: 1px solid #e0e0e0;
-    border-radius: 6px;
-}
-
-.likert-scale label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 0.9em;
-    color: #555;
-    cursor: pointer;
-    padding: 5px 8px;
-    min-width: 45px;
-    text-align: center;
-    transition: transform 0.1s ease-in-out;
-}
-.likert-scale label:hover {
-    transform: scale(1.1);
-    color: #007bff;
-}
-
-.likert-scale input[type="radio"] {
-    margin-top: 6px;
-    cursor: pointer;
-}
-
-button[type="submit"]#submitButton {
-    display: block;
-    width: 100%;
-    padding: 12px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1.15em;
-    font-weight: 500;
+    padding: 20px;
     margin-top: 30px;
-    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-button[type="submit"]#submitButton:hover {
-    background-color: #218838;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-
-/* --- Results Section Specifics --- */
-#results-section {
-    margin-top: 30px;
-    padding: 25px 30px;
-    background-color: #e9f7ef;
-    border: 1px solid #c8e6c9;
-    border-radius: 8px;
-}
-
-/* Action Buttons on Results Page */
-.results-actions {
-    margin-bottom: 25px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #d1e7dd;
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.results-actions button {
-    padding: 10px 18px;
-    font-size: 0.95em;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
-    font-weight: 500;
-}
-.results-actions button:hover {
-    transform: translateY(-1px);
-}
-
-.results-actions button#retakeQuizButton {
-    background-color: #ffc107;
-    color: #212529;
-}
-.results-actions button#retakeQuizButton:hover {
-    background-color: #e0a800;
-}
-
-.results-actions button#savePdfButton {
-    background-color: #17a2b8;
-}
-.results-actions button#savePdfButton:hover {
-    background-color: #138496;
-}
-
-.results-actions button#shareResultsButton {
-    background-color: #007bff;
-}
-.results-actions button#shareResultsButton:hover {
-    background-color: #0056b3;
-}
-
-/* Main Archetype Information in Printable Area */
-#results-section #printable-results-area > p { /* For "Full Archetype Name" and "Personality Code" lines */
-    font-size: 1.05em;
-    margin-bottom: 0.7em;
-}
-#results-section #printable-results-area > p > span { /* Spans containing the actual name/code */
-    font-weight: 500;
-    color: #1a5276;
-}
-
-/* Styling for Archetype Component paragraphs (Prefix, Core, etc.) */
-.archetype-component {
-    color: #444;
-    margin-bottom: 0.6em; /* Consistent spacing for these items */
-    /* margin-left: 15px; */ /* <<< Add this if you want these lines indented. Remove/comment if not. */
-    font-size: 1.05em; /* Match the other main result lines */
-}
-
-.archetype-component strong { /* For "Prefix:", "Core:", etc. labels */
-    color: #2c3e50; /* Consistent with other strong text */
-    font-weight: bold; /* Ensure it's bold */
-}
-.archetype-component span[id*="-name"] { /* Spans containing Prefix Name, Core Name etc. */
-     font-weight: 500; /* Same as other name spans */
-     color: #1a5276;
-}
-/* The blurb part (after the hyphen) will inherit from .archetype-component */
-
-
-/* Styling for the Detailed Trait information list */
-#result-scores-list {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 25px;
-}
-
-#result-scores-list > h3 { /* For the "Understanding Your Traits:" heading, if added by JS */
-    margin-bottom: 18px;
-    font-size: 1.4em;
-    color: #34495e;
-    border-bottom: 1px solid #d1e7dd;
-    padding-bottom: 8px;
-}
-
-#result-scores-list > li { /* Direct li children - each trait item */
-    padding: 12px 0;
-    border-bottom: 1px dashed #d1e7dd;
-}
-#result-scores-list > li:last-of-type {
-    /* This might target an alternative-suggestion-item if it's the absolute last.
-       Consider if you always want the last TRAIT item to have no border,
-       or if the last item overall should have no border.
-       For now, let's assume the last direct trait item.
-    */
-}
-
-/* Trait name, score, direction line */
-#result-scores-list li > strong {
-    display: block;
-    margin-bottom: 6px;
-    color: #2c3e50;
-    font-size: 1.1em;
-}
-
-/* The trait description blurb text */
-.trait-description-text { /* Class added in JS to the span containing the blurb */
-    display: block;
-    color: #495057;
-    line-height: 1.55;
-    font-size: 0.98em;
-    margin-top: 4px;
-}
-
-
-/* Styling for the alternative suggestion item (li with this class) */
-.alternative-suggestion-item {
-    font-style: italic;
-    color: #586069;
-    margin-top: 10px;
-    padding: 10px 10px 10px 15px;
-    border-left: 3px solid #a1c4fd;
-    background-color: #f0f4f8; /* Slightly different background */
-    font-size: 0.95em;
-    border-bottom: none !important; /* Usually don't want a bottom border here */
-    border-radius: 4px;
-}
-
-.alternative-suggestion-item strong { /* For the alternative name part */
-    color: #007bff; /* Brighter blue for the suggestion */
-    font-style: normal;
-}
-.alternative-suggestion-item em { /* For the blurb of the alternative */
-    color: #333;
-    font-style: normal;
-}
-
-/* Responsive adjustments */
-@media (max-width: 480px) {
-    body {
-        padding: 10px;
-    }
-    header, main, footer {
-        padding: 15px;
-    }
-    h1 { font-size: 1.8em; }
-    h2 { font-size: 1.4em; }
-    h3 { font-size: 1.2em; }
-
-    .results-actions {
-        flex-direction: column;
-    }
-    .results-actions button {
-        width: 100%;
-        margin-bottom: 8px;
-    }
-    .results-actions button:last-child {
-        margin-bottom: 0;
-    }
+    background: #333;
+    color: #fff;
 }
