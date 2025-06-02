@@ -3,61 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArcheMorph Personality Quiz</title>
+    <title>Welcome to ArcheMorph</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="print-style.css" media="print">
 </head>
 <body>
     <header>
-        <h1>ArcheMorph Personality Quiz</h1>
+        <h1>ArcheMorph</h1>
+        <p>Your Next-Generation Personality System</p>
     </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About ArcheMorph</a></li>
+            <li><a href="archetype_parts.html">Archetype System</a></li>
+            <li><a href="trait_definitions.html">Trait Definitions</a></li>
+            <!-- Link to quiz page will go here, e.g., <li><a href="quiz.html">Take the Quiz</a></li> -->
+        </ul>
+    </nav>
 
-    <main>
-        <form id="quizForm">
-            <section id="quiz-section">
-                <h2 id="axis-title">Welcome to the ArcheMorph Quiz!</h2>
-                <p id="quiz-intro-text">Please answer all questions below.</p>
-                <div id="questions-container">
-                    <!-- Questions will be loaded here by JavaScript -->
-                </div>
-                <button type="submit" id="submitButton">Get My Archetype</button>
-            </section>
-        </form>
+    <div class="container">
+        <h2>Discover Your Unique Personality Archetype</h2>
+        <p>
+            ArcheMorph is a cutting-edge, multidimensional personality classification system designed to provide
+            deep insights into who you are. Moving beyond traditional models, ArcheMorph analyzes 16 core
+            psychological traits to generate a unique and memorable 4-part archetype name.
+        </p>
+        <p>
+            Understand your strengths, motivations, cognitive styles, and relational patterns like never before.
+            Embark on a journey of self-discovery and unlock a richer understanding of yourself and how you
+            interact with the world.
+        </p>
+        
+        <!-- This button would eventually link to the quiz page -->
+        <a href="#" class="button">Take the ArcheMorph Quiz (Coming Soon!)</a>
 
-        <section id="results-section" style="display:none;">
-            <h2>Your ArcheMorph Profile</h2>
-            <div class="results-actions">
-                <button id="retakeQuizButton">Retake Quiz</button>
-                <button id="savePdfButton">Save as PDF / Print</button>
-                <button id="shareResultsButton">Share Archetype</button>
-            </div>
+        <h3>Why ArcheMorph?</h3>
+        <ul>
+            <li><strong>Highly Granular:</strong> Measures 16 independent axes for a detailed profile.</li>
+            <li><strong>Nuanced Naming:</strong> Your personality is expressed as a unique 4-part archetype.</li>
+            <li><strong>Insightful:</strong> Understand core traits, behavioral styles, cognitive preferences, and complex relational patterns.</li>
+            <li><strong>Modern & Comprehensive:</strong> Integrates and expands upon core ideas from major psychological frameworks.</li>
+        </ul>
 
-            <div id="printable-results-area">
-                <p><strong>Full Archetype Name:</strong> <span id="result-full-name"></span></p>
-                <p><strong>Personality Code:</strong> <span id="result-code"></span></p>
-
-                <h3>Archetype Components:</h3>
-                <p class="archetype-component"><strong>Prefix:</strong> <span id="result-prefix-name"></span> - <span id="result-prefix-blurb"></span></p>
-                <p class="archetype-component"><strong>Core:</strong> <span id="result-core-name"></span> - <span id="result-core-blurb"></span></p>
-                <p class="archetype-component"><strong>Suffix:</strong> <span id="result-suffix-name"></span> - <span id="result-suffix-blurb"></span></p>
-                <p class="archetype-component"><strong>Qualifier:</strong> <span id="result-part4-name"></span> - <span id="result-part4-blurb"></span></p>
-
-                <ul id="result-scores-list">
-                    <!-- Populated by JS for detailed trait scores -->
-                </ul>
-            </div>
-
-            <!-- These were in your original HTML, can be removed if detailed traits cover their intent -->
-            <!-- <div id="alternatives-container"></div> -->
-            <!-- <div id="detailed-breakdown-text"></div> -->
-        </section>
-    </main>
+        <h3>Explore More:</h3>
+        <ul>
+            <li>Learn more <a href="about.html">About ArcheMorph</a> and its foundations.</li>
+            <li>Understand the <a href="archetype_parts.html">Archetype Naming System</a>.</li>
+            <li>Discover the <a href="trait_definitions.html">16 Core Traits</a> we measure.</li>
+        </ul>
+    </div>
 
     <footer>
-        <p>© ArcheMorph System</p>
+        <p>© 2023 ArcheMorph System. All rights reserved.</p>
+        <!-- Add links to Privacy Policy, Contact, etc. here -->
     </footer>
-
-    <script src="data.js"></script>
-    <script src="script.js"></script>
 </body>
 </html>
