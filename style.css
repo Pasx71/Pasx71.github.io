@@ -218,7 +218,7 @@ main:not(.landing-main) p { /* Paragraphs inside default main boxes */
     width: 50px;
     height: 50px;
     margin-bottom: 20px;
-    filter: brightness(0) invert(1) sepia(100%) hue-rotate(130deg) saturate(300%); /* Attempt to make PNGs teal-ish, adjust! */
+    /*filter: brightness(0) invert(1) sepia(100%) hue-rotate(130deg) saturate(300%); /* Attempt to make PNGs teal-ish, adjust! */
     /* If you have light/white PNGs for dark mode, remove filter or use: filter: drop-shadow(0 0 3px #40E0D0); */
 }
 .info-card h3 {
