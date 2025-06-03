@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArcheMorph Personality Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="print-style.css" media="print"> <!-- For print-specific styles -->
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="placeholder-logo.png" alt="ArcheMorph Logo" id="logo"> <!-- Ensure you have this logo or remove -->
+            <h1>ArcheMorph Personality Quiz</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="quiz.html" class="active">Take the Quiz</a></li>
+                <li><a href="archetypes.html">Explore Archetypes</a></li>
+                <li><a href="factors.html">Understand Factors</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <form id="quizForm">
+            <section id="quiz-section">
+                <h2 id="axis-title">Welcome to the ArcheMorph Quiz!</h2>
+                <p id="quiz-intro-text">Please answer all questions below based on how well each statement describes you. Use the scale: 1 (Strongly Disagree) to 6 (Strongly Agree).</p>
+                <div id="questions-container">
+                    <!-- Questions will be loaded here by JavaScript -->
+                </div>
+                <button type="submit" id="submitButton">Get My Archetype</button>
+            </section>
+        </form>
+
+        <section id="results-section" style="display:none;">
+            <h2>Your ArcheMorph Profile</h2>
+            <div class="results-actions">
+                <button id="retakeQuizButton">Retake Quiz</button>
+                <button id="savePdfButton">Save as PDF / Print</button>
+                <button id="shareResultsButton">Share Archetype</button>
+            </div>
+
+            <div id="printable-results-area">
+                <p><strong>Full Archetype Name:</strong> <span id="result-full-name"></span></p>
+                <p><strong>Personality Code:</strong> <span id="result-code"></span></p>
+
+                <h3>Archetype Components:</h3>
+                <p class="archetype-component"><strong>Prefix:</strong> <span id="result-prefix-name"></span> - <span id="result-prefix-blurb"></span></p>
+                <p class="archetype-component"><strong>Core:</strong> <span id="result-core-name"></span> - <span id="result-core-blurb"></span></p>
+                <p class="archetype-component"><strong>Suffix:</strong> <span id="result-suffix-name"></span> - <span id="result-suffix-blurb"></span></p>
+                <p class="archetype-component"><strong>Qualifier:</strong> <span id="result-part4-name"></span> - <span id="result-part4-blurb"></span></p>
+
+                <ul id="result-scores-list">
+                    <!-- Populated by JS for detailed trait scores -->
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© ArcheMorph System</p>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script> <!-- This should be your main quiz logic script -->
+</body>
+</html>
