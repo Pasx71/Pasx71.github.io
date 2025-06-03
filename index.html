@@ -3,59 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to ArcheMorph</title>
+    <title>ArcheMorph - Discover Your Personality Archetype</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>ArcheMorph</h1>
-        <p>Your Next-Generation Personality System</p>
+        <div class="header-content">
+            <img src="placeholder-logo.png" alt="ArcheMorph Logo" id="logo"> <!-- Add a logo if you have one -->
+            <h1>Welcome to ArcheMorph</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="quiz.html">Take the Quiz</a></li>
+                <li><a href="archetypes.html">Explore Archetypes</a></li>
+                <li><a href="factors.html">Understand Factors</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+        </nav>
     </header>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About ArcheMorph</a></li>
-            <li><a href="archetype_parts.html">Archetype System</a></li>
-            <li><a href="trait_definitions.html">Trait Definitions</a></li>
-            <!-- Link to quiz page will go here, e.g., <li><a href="quiz.html">Take the Quiz</a></li> -->
-        </ul>
-    </nav>
 
-    <div class="container">
-        <h2>Discover Your Unique Personality Archetype</h2>
-        <p>
-            ArcheMorph is a cutting-edge, multidimensional personality classification system designed to provide
-            deep insights into who you are. Moving beyond traditional models, ArcheMorph analyzes 16 core
-            psychological traits to generate a unique and memorable 4-part archetype name.
-        </p>
-        <p>
-            Understand your strengths, motivations, cognitive styles, and relational patterns like never before.
-            Embark on a journey of self-discovery and unlock a richer understanding of yourself and how you
-            interact with the world.
-        </p>
-        
-        <!-- This button would eventually link to the quiz page -->
-        <a href="#" class="button">Take the ArcheMorph Quiz (Coming Soon!)</a>
+    <main class="landing-main">
+        <section class="hero">
+            <h2>Uncover the Unique Layers of Your Identity</h2>
+            <p>ArcheMorph helps you explore your multifaceted personality through a comprehensive and insightful quiz. Discover your unique 4-part archetype and gain a deeper understanding of your traits, motivations, and relational styles.</p>
+            <a href="quiz.html" class="cta-button">Take the Quiz Now</a>
+        </section>
 
-        <h3>Why ArcheMorph?</h3>
-        <ul>
-            <li><strong>Highly Granular:</strong> Measures 16 independent axes for a detailed profile.</li>
-            <li><strong>Nuanced Naming:</strong> Your personality is expressed as a unique 4-part archetype.</li>
-            <li><strong>Insightful:</strong> Understand core traits, behavioral styles, cognitive preferences, and complex relational patterns.</li>
-            <li><strong>Modern & Comprehensive:</strong> Integrates and expands upon core ideas from major psychological frameworks.</li>
-        </ul>
-
-        <h3>Explore More:</h3>
-        <ul>
-            <li>Learn more <a href="about.html">About ArcheMorph</a> and its foundations.</li>
-            <li>Understand the <a href="archetype_parts.html">Archetype Naming System</a>.</li>
-            <li>Discover the <a href="trait_definitions.html">16 Core Traits</a> we measure.</li>
-        </ul>
-    </div>
+        <section class="features">
+            <div class="feature-item">
+                <h3>Discover Your Archetype</h3>
+                <p>Receive a personalized 4-part archetype name that reflects your core personality, cognitive style, driving forces, and relational patterns.</p>
+                <a href="archetypes.html" class="learn-more-button">Explore Archetype Components</a>
+            </div>
+            <div class="feature-item">
+                <h3>Understand Key Factors</h3>
+                <p>Delve into the 16 psychological factors that contribute to your profile, with detailed descriptions for high, moderate, and low scores.</p>
+                <a href="factors.html" class="learn-more-button">Learn About the Factors</a>
+            </div>
+            <div class="feature-item">
+                <h3>Gain Nuanced Insights</h3>
+                <p>See how moderate scores can open up alternative expressions of your personality, highlighting your flexibility and potential for growth.</p>
+                <a href="quiz.html" class="learn-more-button">See Example Results (After Quiz)</a>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <p>© 2023 ArcheMorph System. All rights reserved.</p>
-        <!-- Add links to Privacy Policy, Contact, etc. here -->
+        <p>© ArcheMorph System</p>
     </footer>
+    <!-- No specific JS needed for the landing page unless for dynamic elements later -->
 </body>
 </html>
