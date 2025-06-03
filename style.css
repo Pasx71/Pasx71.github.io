@@ -173,3 +173,538 @@ nav ul li a.active { /* Style for active page and hover */
     margin-left: 10px; /* Indent answer slightly */
     color: #454545;
 }
+/* style.css */
+
+/* --- General Body & Page Structure --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height: 1.6;
+    margin: 0;
+    padding: 0; /* Remove body padding if header/footer/main have their own */
+    background-color: #f4f7f6;
+    color: #333;
+    font-size: 16px;
+}
+
+header, main, footer {
+    max-width: 960px; /* Slightly wider max-width for better use of space */
+    margin: 0 auto; /* Center content */
+    padding: 25px 30px;
+}
+/* Specific for main content areas that are boxed */
+main:not(.landing-main), /* Target main elements that are not the landing page */
+header > div.header-content + nav /* Target nav if it's directly after header-content */
+{
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+/* Landing page main has its own styling, so no default box */
+.landing-main {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+
+header {
+    background-color: #343a40; /* Dark header background */
+    color: #fff;
+    padding-top: 15px;
+    padding-bottom: 0; /* Nav will have its own padding */
+    margin-top: 0;
+    margin-bottom: 0; /* Remove bottom margin if nav is directly below */
+    max-width: 100%; /* Header spans full width */
+    border-bottom: 4px solid #007bff; /* Accent color */
+}
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    max-width: 960px; /* Keep content centered */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px; /* Padding for header content itself */
+}
+#logo {
+    height: 40px; /* Adjusted logo size */
+    margin-right: 15px;
+}
+header h1 { /* Target h1 specifically within header for color */
+    color: #fff;
+    margin-bottom: 0;
+    font-size: 1.8em; /* Adjusted size */
+}
+
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #777;
+    padding: 20px;
+    background: #343a40; /* Match header */
+    color: #adb5bd; /* Light text for dark footer */
+    max-width: 100%; /* Footer spans full width */
+    margin-bottom: 0;
+    box-shadow: none;
+}
+
+/* --- Navigation Menu --- */
+nav {
+    background-color: #495057; /* Slightly lighter than header for nav bar */
+    max-width: 100%; /* Nav bar spans full width */
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto; /* Center the ul itself if it's not full width */
+    max-width: 960px; /* Match content width */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 8px 0; /* Padding for the nav bar */
+}
+nav ul li {
+    margin: 5px 10px; /* Spacing for wrapping */
+}
+nav ul li a {
+    text-decoration: none;
+    color: #f8f9fa; /* Light text for dark nav */
+    font-weight: 500;
+    padding: 10px 15px; /* Increased padding */
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    display: block; /* Ensure padding works well */
+}
+nav ul li a:hover,
+nav ul li a.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* --- General Headings & Text (for content inside main boxed areas) --- */
+main:not(.landing-main) h1, /* If quiz.html has an H1 */
+main:not(.landing-main) h2 {
+    color: #34495e;
+    margin-top: 1em;
+    margin-bottom: 0.8em;
+    font-size: 1.6em;
+    border-bottom: 1px solid #ecf0f1;
+    padding-bottom: 0.3em;
+}
+main:not(.landing-main) h3 {
+    color: #34495e;
+    margin-top: 1.5em;
+    margin-bottom: 0.7em;
+    font-size: 1.3em;
+}
+main:not(.landing-main) p {
+    margin-bottom: 1em;
+    color: #555;
+}
+
+/* --- Landing Page Specifics --- */
+.landing-main .hero {
+    text-align: center;
+    padding: 50px 20px;
+    margin-bottom: 50px;
+    background-color: #ffffff; /* White hero on light grey body */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.landing-main .hero h2 { /* Re-style hero h2 as it's outside the normal main block */
+    font-size: 2.4em;
+    color: #2c3e50;
+    margin-bottom: 0.6em;
+    border-bottom: none;
+}
+.landing-main .hero p { /* Re-style hero p */
+    font-size: 1.15em;
+    color: #495057;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.8em;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 12px 25px;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    border-radius: 5px;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+.primary-cta {
+    background-color: #28a745;
+    font-size: 1.25em;
+    padding: 15px 35px;
+}
+.primary-cta:hover {
+    background-color: #218838;
+}
+.secondary-cta {
+    background-color: #007bff;
+    font-size: 0.95em;
+}
+.secondary-cta:hover {
+    background-color: #0056b3;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted minmax */
+    gap: 30px;
+    margin-top: 40px;
+    margin-bottom: 40px; /* Add some bottom margin */
+}
+.info-card {
+    background-color: #ffffff;
+    padding: 30px 25px; /* Increased padding */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.07);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+.info-card-icon {
+    width: 50px; /* Adjusted icon size */
+    height: 50px;
+    margin-bottom: 20px; /* Increased space */
+    opacity: 0.6; /* Adjusted opacity */
+}
+.info-card h3 { /* Re-style info card h3 */
+    margin-top: 0;
+    font-size: 1.3em;
+    color: #343a40;
+    margin-bottom: 12px;
+}
+.info-card p { /* Re-style info card p */
+    font-size: 0.95em; /* Slightly smaller for card */
+    color: #555e68;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+.info-card .secondary-cta {
+    margin-top: auto;
+}
+
+/* --- Quiz Form Specifics (on quiz.html) --- */
+#quiz-section p#quiz-intro-text {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 20px;
+}
+.question-group {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ecf0f1;
+}
+.question-group:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 20px;
+}
+.question-item {
+    margin-bottom: 20px;
+}
+.question-item p {
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: #2c3e50;
+    font-size: 1.05em;
+}
+.likert-scale {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 5px;
+    padding: 8px 5px;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+}
+.likert-scale label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.9em;
+    color: #555;
+    cursor: pointer;
+    padding: 5px 8px;
+    min-width: 45px;
+    text-align: center;
+    transition: transform 0.1s ease-in-out;
+}
+.likert-scale label:hover {
+    transform: scale(1.1);
+    color: #007bff;
+}
+.likert-scale input[type="radio"] {
+    margin-top: 6px;
+    cursor: pointer;
+}
+button[type="submit"]#submitButton {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.15em;
+    font-weight: 500;
+    margin-top: 30px;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+button[type="submit"]#submitButton:hover {
+    background-color: #218838;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* --- Results Section Specifics (on quiz.html) --- */
+#results-section {
+    margin-top: 30px;
+    padding: 25px 30px;
+    background-color: #e9f7ef;
+    border: 1px solid #c8e6c9;
+    border-radius: 8px;
+}
+.results-actions {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #d1e7dd;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.results-actions button {
+    padding: 10px 18px;
+    font-size: 0.95em;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+    font-weight: 500;
+}
+.results-actions button:hover {
+    transform: translateY(-1px);
+}
+.results-actions button#retakeQuizButton {
+    background-color: #ffc107;
+    color: #212529;
+}
+.results-actions button#retakeQuizButton:hover {
+    background-color: #e0a800;
+}
+.results-actions button#savePdfButton {
+    background-color: #17a2b8;
+}
+.results-actions button#savePdfButton:hover {
+    background-color: #138496;
+}
+.results-actions button#shareResultsButton {
+    background-color: #007bff;
+}
+.results-actions button#shareResultsButton:hover {
+    background-color: #0056b3;
+}
+#results-section #printable-results-area > p {
+    font-size: 1.05em;
+    margin-bottom: 0.7em;
+}
+#results-section #printable-results-area > p > span {
+    font-weight: 500;
+    color: #1a5276;
+}
+.archetype-component {
+    color: #444;
+    margin-bottom: 0.6em;
+    /* margin-left: 15px; */ /* Indent these if desired */
+    font-size: 1.05em;
+}
+.archetype-component strong {
+    color: #2c3e50;
+    font-weight: bold;
+}
+.archetype-component span[id*="-name"] {
+     font-weight: 500;
+     color: #1a5276;
+}
+#result-scores-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 25px;
+}
+#result-scores-list > h3 {
+    margin-bottom: 18px;
+    font-size: 1.4em;
+    color: #34495e;
+    border-bottom: 1px solid #d1e7dd;
+    padding-bottom: 8px;
+}
+#result-scores-list > li {
+    padding: 12px 0;
+    border-bottom: 1px dashed #d1e7dd;
+}
+/* No border for the last li, especially if it's an alternative suggestion item */
+#result-scores-list > li:last-child:not(.alternative-suggestion-item) {
+    border-bottom: none;
+}
+#result-scores-list li > strong {
+    display: block;
+    margin-bottom: 6px;
+    color: #2c3e50;
+    font-size: 1.1em;
+}
+.trait-description-text {
+    display: block;
+    color: #495057;
+    line-height: 1.55;
+    font-size: 0.98em;
+    margin-top: 4px;
+}
+.alternative-suggestion-item {
+    font-style: italic;
+    color: #586069;
+    margin-top: 10px;
+    padding: 10px 10px 10px 15px;
+    border-left: 3px solid #a1c4fd;
+    background-color: #f0f4f8;
+    font-size: 0.95em;
+    border-bottom: none !important;
+    border-radius: 4px;
+}
+.alternative-suggestion-item strong {
+    color: #007bff;
+    font-style: normal;
+}
+.alternative-suggestion-item em {
+    color: #333;
+    font-style: normal;
+}
+
+/* --- Styling for Info Page Lists (archetypes.html, factors.html) --- */
+.blurb-list-container ul,
+.factor-list-container ul {
+    list-style: none;
+    padding-left: 0;
+}
+.blurb-list-container li,
+.factor-list-container li {
+    background-color: #f9f9f9;
+    border: 1px solid #e7e7e7;
+    padding: 15px 20px; /* More padding */
+    margin-bottom: 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+.blurb-list-container li strong,
+.factor-list-container li h3 {
+    color: #0056b3;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.15em; /* Slightly larger */
+}
+.factor-list-container li p {
+    margin-bottom: 5px;
+    font-size: 0.95em;
+    color: #454545;
+}
+.factor-list-container li p strong {
+    color: #333;
+    font-weight: 600;
+}
+
+/* --- FAQ Page Specifics --- */
+.faq-item {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #e0e0e0;
+}
+.faq-item:last-child {
+    border-bottom: none;
+}
+.faq-item h3 {
+    margin-bottom: 0.5em;
+    color: #007bff;
+    font-size: 1.2em;
+}
+.faq-item p {
+    margin-left: 0; /* No indent needed if h3 is distinct */
+    color: #454545;
+}
+
+
+/* --- Responsive adjustments --- */
+@media (max-width: 768px) { /* Broader breakpoint for nav adjustments */
+    nav ul {
+        flex-direction: column; /* Stack nav items vertically */
+        align-items: center; /* Center stacked items */
+    }
+    nav ul li {
+        margin: 5px 0; /* Adjust margin for vertical stacking */
+        width: 90%; /* Make nav items take more width */
+        text-align: center;
+    }
+    nav ul li a {
+        display: block; /* Ensure link takes full width of li */
+    }
+    .info-grid {
+        grid-template-columns: 1fr; /* Single column for cards on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        /* padding: 10px; */ /* Removed as header/main/footer handle padding now */
+    }
+    header, main:not(.landing-main), footer { /* Adjust padding for non-landing main too */
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .landing-main { /* Specific padding for landing page on small screens */
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    header h1 { font-size: 1.5em; } /* Further reduce header h1 */
+    main:not(.landing-main) h2, .landing-main .hero h2 { font-size: 1.3em; }
+    main:not(.landing-main) h3, .info-card h3, .faq-item h3 { font-size: 1.15em; }
+
+
+    .results-actions {
+        flex-direction: column;
+    }
+    .results-actions button {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+    .results-actions button:last-child {
+        margin-bottom: 0;
+    }
+}
