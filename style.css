@@ -1,178 +1,3 @@
-/* style.css (ADD THESE STYLES) */
-
-/* --- Navigation Menu --- */
-header {
-    position: relative; /* For potential absolute positioning of logo if desired */
-}
-.header-content {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Center logo and title */
-    margin-bottom: 15px;
-    flex-wrap: wrap; /* Allow wrapping if space is tight */
-}
-#logo {
-    height: 50px; /* Adjust as needed */
-    margin-right: 15px;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center; /* Center nav items */
-    flex-wrap: wrap; /* Allow nav items to wrap */
-    background-color: #e9ecef; /* Light grey background for nav */
-    padding: 10px 0;
-    border-radius: 6px;
-}
-
-nav ul li {
-    margin: 0 10px; /* Spacing between nav items */
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #007bff; /* Bootstrap blue, or your preferred link color */
-    font-weight: 500;
-    padding: 8px 12px;
-    border-radius: 4px;
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-nav ul li a:hover,
-nav ul li a.active { /* Style for active page and hover */
-    background-color: #007bff;
-    color: #fff;
-}
-
-/* --- Landing Page Specifics --- */
-.landing-main .hero {
-    text-align: center;
-    padding: 30px 0;
-    margin-bottom: 30px;
-}
-.landing-main .hero h2 {
-    font-size: 2.2em;
-    color: #343a40; /* Darker heading */
-    margin-bottom: 0.5em;
-    border-bottom: none; /* Remove border from hero h2 */
-}
-.landing-main .hero p {
-    font-size: 1.15em;
-    color: #6c757d; /* Softer text for hero paragraph */
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 1.5em;
-}
-.cta-button {
-    display: inline-block;
-    padding: 12px 30px;
-    background-color: #28a745; /* Same as quiz submit */
-    color: white;
-    text-decoration: none;
-    font-size: 1.2em;
-    border-radius: 6px;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    font-weight: 500;
-}
-.cta-button:hover {
-    background-color: #218838;
-    transform: translateY(-2px);
-}
-
-.landing-main .features {
-    display: flex;
-    gap: 25px;
-    justify-content: space-around;
-    margin-top: 40px;
-    flex-wrap: wrap; /* Allow features to wrap */
-}
-.feature-item {
-    flex-basis: calc(33.333% - 20px); /* Adjust for gap */
-    min-width: 280px; /* Minimum width before wrapping */
-    padding: 20px;
-    background-color: #f8f9fa; /* Light background for feature items */
-    border-radius: 6px;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-.feature-item h3 {
-    margin-top: 0;
-    font-size: 1.3em;
-    color: #007bff;
-}
-.feature-item p {
-    font-size: 0.95em;
-    color: #495057;
-    margin-bottom: 1em;
-}
-.learn-more-button {
-    display: inline-block;
-    padding: 8px 18px;
-    background-color: #6c757d; /* Grey button */
-    color: white;
-    text-decoration: none;
-    font-size: 0.9em;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
-}
-.learn-more-button:hover {
-    background-color: #5a6268;
-}
-
-
-/* --- Styling for Info Page Lists (archetypes.html, factors.html) --- */
-.blurb-list-container ul,
-.factor-list-container ul {
-    list-style: none;
-    padding-left: 0;
-}
-.blurb-list-container li,
-.factor-list-container li {
-    background-color: #f9f9f9;
-    border: 1px solid #e7e7e7;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 6px;
-}
-.blurb-list-container li strong, /* For archetype component name */
-.factor-list-container li h3    /* For trait full name */
-{
-    color: #0056b3; /* Darker blue for titles */
-    display: block;
-    margin-bottom: 8px;
-}
-.factor-list-container li p { /* For High, Mod, Low descriptions */
-    margin-bottom: 5px;
-    font-size: 0.95em;
-}
-.factor-list-container li p strong { /* For "High:", "Moderate:", "Low:" labels */
-    color: #333; /* Reset color for these labels */
-    font-weight: 600;
-}
-
-
-/* --- FAQ Page Specifics --- */
-.faq-item {
-    margin-bottom: 25px;
-    padding-bottom: 15px;
-    border-bottom: 1px dashed #e0e0e0;
-}
-.faq-item:last-child {
-    border-bottom: none;
-}
-.faq-item h3 {
-    margin-bottom: 0.5em;
-    color: #007bff; /* Question color */
-    font-size: 1.2em;
-}
-.faq-item p {
-    margin-left: 10px; /* Indent answer slightly */
-    color: #454545;
-}
 /* style.css */
 
 /* --- General Body & Page Structure --- */
@@ -180,43 +5,43 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     line-height: 1.6;
     margin: 0;
-    padding: 0; /* Remove body padding if header/footer/main have their own */
-    background-color: #f4f7f6;
-    color: #333;
+    padding: 0;
+    background-color: #121212; /* NEAR BLACK - True black #000 can be harsh */
+    color: #00A0A0; /* TEAL - Main text color */
     font-size: 16px;
 }
 
 header, main, footer {
-    max-width: 960px; /* Slightly wider max-width for better use of space */
-    margin: 0 auto; /* Center content */
+    max-width: 960px;
+    margin: 0 auto;
     padding: 25px 30px;
 }
-/* Specific for main content areas that are boxed */
-main:not(.landing-main), /* Target main elements that are not the landing page */
-header > div.header-content + nav /* Target nav if it's directly after header-content */
-{
-    background: #fff;
+
+/* Boxed content areas (non-landing main, nav if it was inside header-content) */
+main:not(.landing-main),
+header > div.header-content + nav {
+    background: #1C1C1C; /* DARK GREY - Slightly lighter than body for contrast */
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    /* box-shadow: 0 4px 12px rgba(255,255,255,0.05); */ /* Subtle light shadow on dark bg */
+    border: 1px solid #333; /* Subtle border for definition */
     margin-top: 20px;
     margin-bottom: 20px;
 }
-/* Landing page main has its own styling, so no default box */
-.landing-main {
+.landing-main { /* Landing page main still has its own direct styling */
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
 
 header {
-    background-color: #343a40; /* Dark header background */
-    color: #fff;
+    background-color: #0D0D0D; /* VERY DARK GREY/OFF-BLACK for header */
+    color: #E0E0E0; /* Light grey for header text elements by default */
     padding-top: 15px;
-    padding-bottom: 0; /* Nav will have its own padding */
+    padding-bottom: 0;
     margin-top: 0;
-    margin-bottom: 0; /* Remove bottom margin if nav is directly below */
-    max-width: 100%; /* Header spans full width */
-    border-bottom: 4px solid #007bff; /* Accent color */
+    margin-bottom: 0;
+    max-width: 100%;
+    border-bottom: 4px solid #8A2BE2; /* PURPLE - Accent color */
 }
 .header-content {
     display: flex;
@@ -224,19 +49,20 @@ header {
     justify-content: center;
     margin-bottom: 10px;
     flex-wrap: wrap;
-    max-width: 960px; /* Keep content centered */
+    max-width: 960px;
     margin-left: auto;
     margin-right: auto;
-    padding: 0 20px; /* Padding for header content itself */
+    padding: 0 20px;
 }
-#logo {
-    height: 40px; /* Adjusted logo size */
+#logo { /* Assuming PNGs, you might need to invert colors or use a light version of logo */
+    height: 40px;
     margin-right: 15px;
+    /* filter: invert(1) brightness(1.5) contrast(200%); /* Example filter for dark logo on dark bg */
 }
-header h1 { /* Target h1 specifically within header for color */
-    color: #fff;
+header h1 {
+    color: #FFFFFF; /* WHITE - For prominent header title */
     margin-bottom: 0;
-    font-size: 1.8em; /* Adjusted size */
+    font-size: 1.8em;
 }
 
 
@@ -244,67 +70,66 @@ footer {
     text-align: center;
     margin-top: 40px;
     font-size: 0.9em;
-    color: #777;
     padding: 20px;
-    background: #343a40; /* Match header */
-    color: #adb5bd; /* Light text for dark footer */
-    max-width: 100%; /* Footer spans full width */
+    background: #0D0D0D; /* Match header */
+    color: #7A7A7A; /* MEDIUM GREY - For footer text */
+    max-width: 100%;
     margin-bottom: 0;
     box-shadow: none;
 }
 
 /* --- Navigation Menu --- */
 nav {
-    background-color: #495057; /* Slightly lighter than header for nav bar */
-    max-width: 100%; /* Nav bar spans full width */
+    background-color: #1A1A1A; /* DARK GREY - For nav bar, slightly lighter than header */
+    max-width: 100%;
 }
 nav ul {
     list-style: none;
     padding: 0;
-    margin: 0 auto; /* Center the ul itself if it's not full width */
-    max-width: 960px; /* Match content width */
+    margin: 0 auto;
+    max-width: 960px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 8px 0; /* Padding for the nav bar */
+    padding: 8px 0;
 }
 nav ul li {
-    margin: 5px 10px; /* Spacing for wrapping */
+    margin: 5px 10px;
 }
 nav ul li a {
     text-decoration: none;
-    color: #f8f9fa; /* Light text for dark nav */
+    color: #40E0D0; /* BRIGHTER TEAL - For nav links for contrast */
     font-weight: 500;
-    padding: 10px 15px; /* Increased padding */
+    padding: 10px 15px;
     border-radius: 4px;
     transition: background-color 0.2s ease, color 0.2s ease;
-    display: block; /* Ensure padding works well */
+    display: block;
 }
 nav ul li a:hover,
 nav ul li a.active {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #8A2BE2; /* PURPLE - For active/hover nav items */
+    color: #FFFFFF; /* WHITE text on purple */
 }
 
 /* --- General Headings & Text (for content inside main boxed areas) --- */
-main:not(.landing-main) h1, /* If quiz.html has an H1 */
+main:not(.landing-main) h1,
 main:not(.landing-main) h2 {
-    color: #34495e;
+    color: #00C2C2; /* BRIGHTER TEAL - For H2 headings inside boxes */
     margin-top: 1em;
     margin-bottom: 0.8em;
     font-size: 1.6em;
-    border-bottom: 1px solid #ecf0f1;
+    border-bottom: 1px solid #383838; /* Darker grey separator */
     padding-bottom: 0.3em;
 }
 main:not(.landing-main) h3 {
-    color: #34495e;
+    color: #00B3B3; /* Slightly different TEAL for H3 */
     margin-top: 1.5em;
     margin-bottom: 0.7em;
     font-size: 1.3em;
 }
-main:not(.landing-main) p {
+main:not(.landing-main) p { /* Paragraphs inside default main boxes */
     margin-bottom: 1em;
-    color: #555;
+    color: #00A0A0; /* TEAL */
 }
 
 /* --- Landing Page Specifics --- */
@@ -312,19 +137,20 @@ main:not(.landing-main) p {
     text-align: center;
     padding: 50px 20px;
     margin-bottom: 50px;
-    background-color: #ffffff; /* White hero on light grey body */
+    background-color: #1C1C1C; /* DARK GREY box for hero on blacker body */
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border: 1px solid #333;
+    /* box-shadow: 0 4px 12px rgba(255,255,255,0.05); */
 }
-.landing-main .hero h2 { /* Re-style hero h2 as it's outside the normal main block */
+.landing-main .hero h2 {
     font-size: 2.4em;
-    color: #2c3e50;
+    color: #40E0D0; /* BRIGHTER TEAL */
     margin-bottom: 0.6em;
     border-bottom: none;
 }
-.landing-main .hero p { /* Re-style hero p */
+.landing-main .hero p {
     font-size: 1.15em;
-    color: #495057;
+    color: #00B3B3; /* TEAL */
     max-width: 750px;
     margin-left: auto;
     margin-right: auto;
@@ -334,7 +160,7 @@ main:not(.landing-main) p {
 .cta-button {
     display: inline-block;
     padding: 12px 25px;
-    color: white;
+    color: #FFFFFF; /* WHITE text on buttons */
     text-decoration: none;
     font-size: 1.1em;
     border-radius: 5px;
@@ -342,40 +168,41 @@ main:not(.landing-main) p {
     font-weight: 500;
     border: none;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* box-shadow: 0 2px 4px rgba(255,255,255,0.08); */ /* Light shadow for dark bg */
 }
 .cta-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    /* box-shadow: 0 4px 8px rgba(255,255,255,0.1); */
 }
 .primary-cta {
-    background-color: #28a745;
+    background-color: #800080; /* PURPLE */
     font-size: 1.25em;
     padding: 15px 35px;
 }
 .primary-cta:hover {
-    background-color: #218838;
+    background-color: #6A0DAD; /* Darker PURPLE */
 }
 .secondary-cta {
-    background-color: #007bff;
+    background-color: #9370DB; /* Lighter/Medium PURPLE */
     font-size: 0.95em;
 }
 .secondary-cta:hover {
-    background-color: #0056b3;
+    background-color: #7A5DC7; /* Darker Medium PURPLE */
 }
 
 .info-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted minmax */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
     margin-top: 40px;
-    margin-bottom: 40px; /* Add some bottom margin */
+    margin-bottom: 40px;
 }
 .info-card {
-    background-color: #ffffff;
-    padding: 30px 25px; /* Increased padding */
+    background-color: #202020; /* Very dark grey for cards */
+    padding: 30px 25px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.07);
+    border: 1px solid #383838;
+    /* box-shadow: 0 4px 8px rgba(255,255,255,0.05); */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -384,23 +211,25 @@ main:not(.landing-main) p {
 }
 .info-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    /* box-shadow: 0 6px 12px rgba(255,255,255,0.08); */
+    border-color: #8A2BE2; /* PURPLE border on hover */
 }
 .info-card-icon {
-    width: 50px; /* Adjusted icon size */
+    width: 50px;
     height: 50px;
-    margin-bottom: 20px; /* Increased space */
-    opacity: 0.6; /* Adjusted opacity */
+    margin-bottom: 20px;
+    filter: brightness(0) invert(1) sepia(100%) hue-rotate(130deg) saturate(300%); /* Attempt to make PNGs teal-ish, adjust! */
+    /* If you have light/white PNGs for dark mode, remove filter or use: filter: drop-shadow(0 0 3px #40E0D0); */
 }
-.info-card h3 { /* Re-style info card h3 */
+.info-card h3 {
     margin-top: 0;
     font-size: 1.3em;
-    color: #343a40;
+    color: #00DCDC; /* Different TEAL for card H3s */
     margin-bottom: 12px;
 }
-.info-card p { /* Re-style info card p */
-    font-size: 0.95em; /* Slightly smaller for card */
-    color: #555e68;
+.info-card p {
+    font-size: 0.95em;
+    color: #00A0A0; /* TEAL */
     margin-bottom: 20px;
     flex-grow: 1;
 }
@@ -411,13 +240,13 @@ main:not(.landing-main) p {
 /* --- Quiz Form Specifics (on quiz.html) --- */
 #quiz-section p#quiz-intro-text {
     font-size: 1.1em;
-    color: #555;
+    color: #00B3B3; /* TEAL */
     margin-bottom: 20px;
 }
 .question-group {
     margin-bottom: 30px;
     padding-bottom: 20px;
-    border-bottom: 1px solid #ecf0f1;
+    border-bottom: 1px solid #383838;
 }
 .question-group:last-of-type {
     border-bottom: none;
@@ -427,10 +256,10 @@ main:not(.landing-main) p {
 .question-item {
     margin-bottom: 20px;
 }
-.question-item p {
+.question-item p { /* Question text */
     margin-bottom: 10px;
     font-weight: 500;
-    color: #2c3e50;
+    color: #40E0D0; /* BRIGHTER TEAL for questions */
     font-size: 1.05em;
 }
 .likert-scale {
@@ -440,8 +269,8 @@ main:not(.landing-main) p {
     align-items: center;
     margin-top: 5px;
     padding: 8px 5px;
-    background-color: #f9f9f9;
-    border: 1px solid #e0e0e0;
+    background-color: #252525; /* Darker background for scale */
+    border: 1px solid #404040;
     border-radius: 6px;
 }
 .likert-scale label {
@@ -449,7 +278,7 @@ main:not(.landing-main) p {
     flex-direction: column;
     align-items: center;
     font-size: 0.9em;
-    color: #555;
+    color: #AEAEAE; /* Light grey for scale numbers */
     cursor: pointer;
     padding: 5px 8px;
     min-width: 45px;
@@ -458,17 +287,18 @@ main:not(.landing-main) p {
 }
 .likert-scale label:hover {
     transform: scale(1.1);
-    color: #007bff;
+    color: #40E0D0; /* TEAL on hover */
 }
 .likert-scale input[type="radio"] {
     margin-top: 6px;
     cursor: pointer;
+    /* Consider styling radio buttons for dark mode if default is hard to see */
 }
 button[type="submit"]#submitButton {
     display: block;
     width: 100%;
     padding: 12px 20px;
-    background-color: #28a745;
+    background-color: #8A2BE2; /* PURPLE */
     color: white;
     border: none;
     border-radius: 6px;
@@ -477,25 +307,30 @@ button[type="submit"]#submitButton {
     font-weight: 500;
     margin-top: 30px;
     transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* box-shadow: 0 2px 4px rgba(255,255,255,0.08); */
 }
 button[type="submit"]#submitButton:hover {
-    background-color: #218838;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    background-color: #7A1FB8; /* Darker PURPLE */
+    /* box-shadow: 0 4px 8px rgba(255,255,255,0.1); */
 }
 
 /* --- Results Section Specifics (on quiz.html) --- */
 #results-section {
     margin-top: 30px;
     padding: 25px 30px;
-    background-color: #e9f7ef;
-    border: 1px solid #c8e6c9;
+    background-color: #1A2A2A; /* DARK TEAL background for results */
+    border: 1px solid #004D4D; /* Darker TEAL border */
     border-radius: 8px;
+    color: #ADD8E6; /* LIGHT BLUEISH text for contrast on dark teal */
+}
+#results-section h2, #results-section h3 {
+    color: #7FFFD4; /* AQUAMARINE for headings in results */
+    border-bottom-color: #004D4D;
 }
 .results-actions {
     margin-bottom: 25px;
     padding-bottom: 20px;
-    border-bottom: 1px solid #d1e7dd;
+    border-bottom: 1px solid #004D4D;
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
@@ -515,100 +350,101 @@ button[type="submit"]#submitButton:hover {
     transform: translateY(-1px);
 }
 .results-actions button#retakeQuizButton {
-    background-color: #ffc107;
-    color: #212529;
+    background-color: #B22222; /* Firebrick (Dark Red) for retake */
+    color: #fff;
 }
 .results-actions button#retakeQuizButton:hover {
-    background-color: #e0a800;
+    background-color: #8B0000; /* Darker Red */
 }
 .results-actions button#savePdfButton {
-    background-color: #17a2b8;
+    background-color: #6A0DAD; /* PURPLE (Darker) */
 }
 .results-actions button#savePdfButton:hover {
-    background-color: #138496;
+    background-color: #4B0082; /* Indigo */
 }
 .results-actions button#shareResultsButton {
-    background-color: #007bff;
+    background-color: #9370DB; /* Medium PURPLE */
 }
 .results-actions button#shareResultsButton:hover {
-    background-color: #0056b3;
+    background-color: #7A5DC7;
 }
 #results-section #printable-results-area > p {
     font-size: 1.05em;
     margin-bottom: 0.7em;
+    color: #ADD8E6; /* Light blue text */
 }
 #results-section #printable-results-area > p > span {
     font-weight: 500;
-    color: #1a5276;
+    color: #AFEEEE; /* PALE TURQUOISE for spans */
 }
 .archetype-component {
-    color: #444;
+    color: #B0C4DE; /* LIGHT STEEL BLUE */
     margin-bottom: 0.6em;
-    /* margin-left: 15px; */ /* Indent these if desired */
     font-size: 1.05em;
 }
 .archetype-component strong {
-    color: #2c3e50;
+    color: #E6E6FA; /* LAVENDER for labels */
     font-weight: bold;
 }
 .archetype-component span[id*="-name"] {
      font-weight: 500;
-     color: #1a5276;
+     color: #AFEEEE; /* PALE TURQUOISE */
 }
 #result-scores-list {
     list-style-type: none;
     padding: 0;
     margin-top: 25px;
 }
-#result-scores-list > h3 {
+#result-scores-list > h3 { /* "Understanding Your Traits:" */
     margin-bottom: 18px;
     font-size: 1.4em;
-    color: #34495e;
-    border-bottom: 1px solid #d1e7dd;
+    color: #7FFFD4; /* AQUAMARINE */
+    border-bottom: 1px solid #004D4D;
     padding-bottom: 8px;
 }
 #result-scores-list > li {
     padding: 12px 0;
-    border-bottom: 1px dashed #d1e7dd;
+    border-bottom: 1px dashed #004D4D;
+    color: #B0E0E6; /* POWDER BLUE for li text */
 }
-/* No border for the last li, especially if it's an alternative suggestion item */
 #result-scores-list > li:last-child:not(.alternative-suggestion-item) {
     border-bottom: none;
 }
-#result-scores-list li > strong {
+#result-scores-list li > strong { /* Trait name, score, direction */
     display: block;
     margin-bottom: 6px;
-    color: #2c3e50;
+    color: #AFEEEE; /* PALE TURQUOISE */
     font-size: 1.1em;
 }
 .trait-description-text {
     display: block;
-    color: #495057;
+    color: #C0D8D8; /* Lighter Powder Blue for blurbs */
     line-height: 1.55;
     font-size: 0.98em;
     margin-top: 4px;
 }
 .alternative-suggestion-item {
     font-style: italic;
-    color: #586069;
+    color: #90A0A0; /* Greyish Teal */
     margin-top: 10px;
     padding: 10px 10px 10px 15px;
-    border-left: 3px solid #a1c4fd;
-    background-color: #f0f4f8;
+    border-left: 3px solid #8A2BE2; /* PURPLE accent */
+    background-color: #1E3A3A; /* Very Dark Teal for background */
     font-size: 0.95em;
     border-bottom: none !important;
     border-radius: 4px;
 }
 .alternative-suggestion-item strong {
-    color: #007bff;
+    color: #9370DB; /* Medium PURPLE */
     font-style: normal;
 }
 .alternative-suggestion-item em {
-    color: #333;
+    color: #B0C4DE; /* Light Steel Blue */
     font-style: normal;
 }
 
 /* --- Styling for Info Page Lists (archetypes.html, factors.html) --- */
+/* These pages will also have the dark background from body */
 .blurb-list-container ul,
 .factor-list-container ul {
     list-style: none;
@@ -616,86 +452,82 @@ button[type="submit"]#submitButton:hover {
 }
 .blurb-list-container li,
 .factor-list-container li {
-    background-color: #f9f9f9;
-    border: 1px solid #e7e7e7;
-    padding: 15px 20px; /* More padding */
+    background-color: #1E1E1E; /* Dark grey item background */
+    border: 1px solid #333333;
+    padding: 15px 20px;
     margin-bottom: 15px;
     border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    /* box-shadow: 0 2px 4px rgba(255,255,255,0.03); */
 }
-.blurb-list-container li strong,
-.factor-list-container li h3 {
-    color: #0056b3;
+.blurb-list-container li strong, /* Archetype component name */
+.factor-list-container li h3 {   /* Trait full name */
+    color: #40E0D0; /* BRIGHTER TEAL */
     display: block;
     margin-bottom: 8px;
-    font-size: 1.15em; /* Slightly larger */
+    font-size: 1.15em;
 }
-.factor-list-container li p {
+.factor-list-container li p { /* High, Mod, Low descriptions */
     margin-bottom: 5px;
     font-size: 0.95em;
-    color: #454545;
+    color: #00A0A0; /* TEAL */
 }
-.factor-list-container li p strong {
-    color: #333;
+.factor-list-container li p strong { /* "High:", "Moderate:", "Low:" labels */
+    color: #AEAEAE; /* Light Grey for labels */
     font-weight: 600;
 }
 
 /* --- FAQ Page Specifics --- */
+/* FAQ items will also be on dark background */
 .faq-item {
     margin-bottom: 25px;
     padding-bottom: 15px;
-    border-bottom: 1px dashed #e0e0e0;
+    border-bottom: 1px dashed #383838;
 }
 .faq-item:last-child {
     border-bottom: none;
 }
-.faq-item h3 {
+.faq-item h3 { /* Question */
     margin-bottom: 0.5em;
-    color: #007bff;
+    color: #40E0D0; /* BRIGHTER TEAL */
     font-size: 1.2em;
 }
-.faq-item p {
-    margin-left: 0; /* No indent needed if h3 is distinct */
-    color: #454545;
+.faq-item p { /* Answer */
+    margin-left: 0;
+    color: #00A0A0; /* TEAL */
 }
 
 
 /* --- Responsive adjustments --- */
-@media (max-width: 768px) { /* Broader breakpoint for nav adjustments */
+@media (max-width: 768px) {
     nav ul {
-        flex-direction: column; /* Stack nav items vertically */
-        align-items: center; /* Center stacked items */
+        flex-direction: column;
+        align-items: center;
     }
     nav ul li {
-        margin: 5px 0; /* Adjust margin for vertical stacking */
-        width: 90%; /* Make nav items take more width */
+        margin: 5px 0;
+        width: 90%;
         text-align: center;
     }
     nav ul li a {
-        display: block; /* Ensure link takes full width of li */
+        display: block;
     }
     .info-grid {
-        grid-template-columns: 1fr; /* Single column for cards on smaller screens */
+        grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 480px) {
-    body {
-        /* padding: 10px; */ /* Removed as header/main/footer handle padding now */
-    }
-    header, main:not(.landing-main), footer { /* Adjust padding for non-landing main too */
+    header, main:not(.landing-main), footer {
         padding-left: 15px;
         padding-right: 15px;
     }
-    .landing-main { /* Specific padding for landing page on small screens */
+    .landing-main {
         padding-left: 10px;
         padding-right: 10px;
     }
-
-    header h1 { font-size: 1.5em; } /* Further reduce header h1 */
+    header h1 { font-size: 1.5em; }
     main:not(.landing-main) h2, .landing-main .hero h2 { font-size: 1.3em; }
     main:not(.landing-main) h3, .info-card h3, .faq-item h3 { font-size: 1.15em; }
-
 
     .results-actions {
         flex-direction: column;
@@ -706,5 +538,7 @@ button[type="submit"]#submitButton:hover {
     }
     .results-actions button:last-child {
         margin-bottom: 0;
+    }
+}
     }
 }
