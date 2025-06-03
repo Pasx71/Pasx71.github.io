@@ -6,7 +6,7 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #121212; /* NEAR BLACK - True black #000 can be harsh */
+    background-color: #121212; /* NEAR BLACK */
     color: #00A0A0; /* TEAL - Main text color */
     font-size: 16px;
 }
@@ -16,32 +16,28 @@ header, main, footer {
     margin: 0 auto;
     padding: 25px 30px;
 }
-
-/* Boxed content areas (non-landing main, nav if it was inside header-content) */
 main:not(.landing-main),
 header > div.header-content + nav {
-    background: #1C1C1C; /* DARK GREY - Slightly lighter than body for contrast */
+    background: #1C1C1C; /* DARK GREY */
     border-radius: 8px;
-    /* box-shadow: 0 4px 12px rgba(255,255,255,0.05); */ /* Subtle light shadow on dark bg */
-    border: 1px solid #333; /* Subtle border for definition */
+    border: 1px solid #333;
     margin-top: 20px;
     margin-bottom: 20px;
 }
-.landing-main { /* Landing page main still has its own direct styling */
+.landing-main {
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
-
 header {
-    background-color: #0D0D0D; /* VERY DARK GREY/OFF-BLACK for header */
-    color: #E0E0E0; /* Light grey for header text elements by default */
+    background-color: #0D0D0D; /* VERY DARK GREY/OFF-BLACK */
+    color: #E0E0E0;
     padding-top: 15px;
     padding-bottom: 0;
     margin-top: 0;
     margin-bottom: 0;
     max-width: 100%;
-    border-bottom: 4px solid #8A2BE2; /* PURPLE - Accent color */
+    border-bottom: 4px solid #8A2BE2; /* PURPLE - Accent */
 }
 .header-content {
     display: flex;
@@ -54,25 +50,26 @@ header {
     margin-right: auto;
     padding: 0 20px;
 }
-#logo { /* Assuming PNGs, you might need to invert colors or use a light version of logo */
+#logo {
     height: 40px;
     margin-right: 15px;
-    /* filter: invert(1) brightness(1.5) contrast(200%); /* Example filter for dark logo on dark bg */
+    /* If your logo PNG is dark, you might need a light version for dark theme */
+    /* Or try CSS filter if it's a simple shape and you want to colorize it (less reliable for complex PNGs) */
+    /* filter: invert(1) brightness(1.5) contrast(200%); */
 }
 header h1 {
-    color: #FFFFFF; /* WHITE - For prominent header title */
+    color: #FFFFFF;
     margin-bottom: 0;
     font-size: 1.8em;
 }
-
 
 footer {
     text-align: center;
     margin-top: 40px;
     font-size: 0.9em;
     padding: 20px;
-    background: #0D0D0D; /* Match header */
-    color: #7A7A7A; /* MEDIUM GREY - For footer text */
+    background: #0D0D0D;
+    color: #7A7A7A;
     max-width: 100%;
     margin-bottom: 0;
     box-shadow: none;
@@ -80,7 +77,7 @@ footer {
 
 /* --- Navigation Menu --- */
 nav {
-    background-color: #1A1A1A; /* DARK GREY - For nav bar, slightly lighter than header */
+    background-color: #1A1A1A;
     max-width: 100%;
 }
 nav ul {
@@ -98,7 +95,7 @@ nav ul li {
 }
 nav ul li a {
     text-decoration: none;
-    color: #40E0D0; /* BRIGHTER TEAL - For nav links for contrast */
+    color: #40E0D0; /* BRIGHTER TEAL */
     font-weight: 500;
     padding: 10px 15px;
     border-radius: 4px;
@@ -107,27 +104,27 @@ nav ul li a {
 }
 nav ul li a:hover,
 nav ul li a.active {
-    background-color: #8A2BE2; /* PURPLE - For active/hover nav items */
-    color: #FFFFFF; /* WHITE text on purple */
+    background-color: #8A2BE2; /* PURPLE */
+    color: #FFFFFF;
 }
 
-/* --- General Headings & Text (for content inside main boxed areas) --- */
+/* --- General Headings & Text (for content inside main:not(.landing-main) boxed areas) --- */
 main:not(.landing-main) h1,
 main:not(.landing-main) h2 {
-    color: #00C2C2; /* BRIGHTER TEAL - For H2 headings inside boxes */
+    color: #00C2C2; /* BRIGHTER TEAL */
     margin-top: 1em;
     margin-bottom: 0.8em;
     font-size: 1.6em;
-    border-bottom: 1px solid #383838; /* Darker grey separator */
+    border-bottom: 1px solid #383838;
     padding-bottom: 0.3em;
 }
 main:not(.landing-main) h3 {
-    color: #00B3B3; /* Slightly different TEAL for H3 */
+    color: #00B3B3; /* Slightly different TEAL */
     margin-top: 1.5em;
     margin-bottom: 0.7em;
     font-size: 1.3em;
 }
-main:not(.landing-main) p { /* Paragraphs inside default main boxes */
+main:not(.landing-main) p {
     margin-bottom: 1em;
     color: #00A0A0; /* TEAL */
 }
@@ -137,20 +134,19 @@ main:not(.landing-main) p { /* Paragraphs inside default main boxes */
     text-align: center;
     padding: 50px 20px;
     margin-bottom: 50px;
-    background-color: #1C1C1C; /* DARK GREY box for hero on blacker body */
+    background-color: #1C1C1C;
     border-radius: 8px;
     border: 1px solid #333;
-    /* box-shadow: 0 4px 12px rgba(255,255,255,0.05); */
 }
 .landing-main .hero h2 {
     font-size: 2.4em;
-    color: #40E0D0; /* BRIGHTER TEAL */
+    color: #40E0D0;
     margin-bottom: 0.6em;
     border-bottom: none;
 }
 .landing-main .hero p {
     font-size: 1.15em;
-    color: #00B3B3; /* TEAL */
+    color: #00B3B3;
     max-width: 750px;
     margin-left: auto;
     margin-right: auto;
@@ -160,7 +156,7 @@ main:not(.landing-main) p { /* Paragraphs inside default main boxes */
 .cta-button {
     display: inline-block;
     padding: 12px 25px;
-    color: #FFFFFF; /* WHITE text on buttons */
+    color: #FFFFFF;
     text-decoration: none;
     font-size: 1.1em;
     border-radius: 5px;
@@ -168,11 +164,9 @@ main:not(.landing-main) p { /* Paragraphs inside default main boxes */
     font-weight: 500;
     border: none;
     cursor: pointer;
-    /* box-shadow: 0 2px 4px rgba(255,255,255,0.08); */ /* Light shadow for dark bg */
 }
 .cta-button:hover {
     transform: translateY(-2px);
-    /* box-shadow: 0 4px 8px rgba(255,255,255,0.1); */
 }
 .primary-cta {
     background-color: #800080; /* PURPLE */
@@ -190,57 +184,66 @@ main:not(.landing-main) p { /* Paragraphs inside default main boxes */
     background-color: #7A5DC7; /* Darker Medium PURPLE */
 }
 
+/* MODIFIED: Info Grid Section uses Flexbox now */
 .info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* This will center items on an incomplete last row */
     gap: 30px;
     margin-top: 40px;
     margin-bottom: 40px;
+    padding: 0 10px;
 }
+
 .info-card {
-    background-color: #202020; /* Very dark grey for cards */
+    background-color: #202020;
     padding: 30px 25px;
     border-radius: 8px;
     border: 1px solid #383838;
-    /* box-shadow: 0 4px 8px rgba(255,255,255,0.05); */
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out, border-color 0.2s ease-in-out; /* Added border-color transition */
+    
+    flex-basis: 280px; /* Suggests a base width, allowing 3 cards on a ~960px container with gaps */
+                       /* Adjust this value to influence how many cards fit per row */
+    flex-grow: 1;      /* Allows cards to grow and fill space on a line. Set to 0 if you want them fixed at flex-basis. */
+    min-width: 260px;  /* Prevent cards from becoming too narrow */
+    max-width: 100%;   /* Ensure card doesn't overflow if flex-basis is large and container small */
 }
 .info-card:hover {
     transform: translateY(-5px);
-    /* box-shadow: 0 6px 12px rgba(255,255,255,0.08); */
     border-color: #8A2BE2; /* PURPLE border on hover */
 }
 .info-card-icon {
     width: 50px;
     height: 50px;
     margin-bottom: 20px;
-    /*filter: brightness(0) invert(1) sepia(100%) hue-rotate(130deg) saturate(300%); /* Attempt to make PNGs teal-ish, adjust! */
-    /* If you have light/white PNGs for dark mode, remove filter or use: filter: drop-shadow(0 0 3px #40E0D0); */
+    opacity: 0.8; /* Assuming light-colored PNGs. Adjust if needed. */
+                  /* REMOVED CSS filter for color correction */
 }
 .info-card h3 {
     margin-top: 0;
     font-size: 1.3em;
-    color: #00DCDC; /* Different TEAL for card H3s */
+    color: #00DCDC; /* TEAL */
     margin-bottom: 12px;
 }
 .info-card p {
     font-size: 0.95em;
     color: #00A0A0; /* TEAL */
     margin-bottom: 20px;
-    flex-grow: 1;
+    flex-grow: 1; /* Helps push button down if text heights vary */
 }
 .info-card .secondary-cta {
-    margin-top: auto;
+    margin-top: auto; /* Pushes button to the bottom of the card */
 }
+
 
 /* --- Quiz Form Specifics (on quiz.html) --- */
 #quiz-section p#quiz-intro-text {
     font-size: 1.1em;
-    color: #00B3B3; /* TEAL */
+    color: #00B3B3;
     margin-bottom: 20px;
 }
 .question-group {
@@ -256,10 +259,10 @@ main:not(.landing-main) p { /* Paragraphs inside default main boxes */
 .question-item {
     margin-bottom: 20px;
 }
-.question-item p { /* Question text */
+.question-item p {
     margin-bottom: 10px;
     font-weight: 500;
-    color: #40E0D0; /* BRIGHTER TEAL for questions */
+    color: #40E0D0;
     font-size: 1.05em;
 }
 .likert-scale {
@@ -269,7 +272,7 @@ main:not(.landing-main) p { /* Paragraphs inside default main boxes */
     align-items: center;
     margin-top: 5px;
     padding: 8px 5px;
-    background-color: #252525; /* Darker background for scale */
+    background-color: #252525;
     border: 1px solid #404040;
     border-radius: 6px;
 }
@@ -278,7 +281,7 @@ main:not(.landing-main) p { /* Paragraphs inside default main boxes */
     flex-direction: column;
     align-items: center;
     font-size: 0.9em;
-    color: #AEAEAE; /* Light grey for scale numbers */
+    color: #AEAEAE;
     cursor: pointer;
     padding: 5px 8px;
     min-width: 45px;
@@ -287,12 +290,13 @@ main:not(.landing-main) p { /* Paragraphs inside default main boxes */
 }
 .likert-scale label:hover {
     transform: scale(1.1);
-    color: #40E0D0; /* TEAL on hover */
+    color: #40E0D0;
 }
 .likert-scale input[type="radio"] {
     margin-top: 6px;
     cursor: pointer;
-    /* Consider styling radio buttons for dark mode if default is hard to see */
+    /* Consider custom styling for radio buttons on dark themes */
+    accent-color: #8A2BE2; /* Styles the selected radio button dot to purple */
 }
 button[type="submit"]#submitButton {
     display: block;
@@ -306,25 +310,23 @@ button[type="submit"]#submitButton {
     font-size: 1.15em;
     font-weight: 500;
     margin-top: 30px;
-    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    /* box-shadow: 0 2px 4px rgba(255,255,255,0.08); */
+    transition: background-color 0.2s ease-in-out;
 }
 button[type="submit"]#submitButton:hover {
     background-color: #7A1FB8; /* Darker PURPLE */
-    /* box-shadow: 0 4px 8px rgba(255,255,255,0.1); */
 }
 
 /* --- Results Section Specifics (on quiz.html) --- */
 #results-section {
     margin-top: 30px;
     padding: 25px 30px;
-    background-color: #1A2A2A; /* DARK TEAL background for results */
-    border: 1px solid #004D4D; /* Darker TEAL border */
+    background-color: #1A2A2A; /* DARK TEAL background */
+    border: 1px solid #004D4D;
     border-radius: 8px;
-    color: #ADD8E6; /* LIGHT BLUEISH text for contrast on dark teal */
+    color: #ADD8E6; /* LIGHT BLUEISH text */
 }
 #results-section h2, #results-section h3 {
-    color: #7FFFD4; /* AQUAMARINE for headings in results */
+    color: #7FFFD4; /* AQUAMARINE headings */
     border-bottom-color: #004D4D;
 }
 .results-actions {
@@ -350,11 +352,11 @@ button[type="submit"]#submitButton:hover {
     transform: translateY(-1px);
 }
 .results-actions button#retakeQuizButton {
-    background-color: #B22222; /* Firebrick (Dark Red) for retake */
+    background-color: #B22222; /* Firebrick (Dark Red) */
     color: #fff;
 }
 .results-actions button#retakeQuizButton:hover {
-    background-color: #8B0000; /* Darker Red */
+    background-color: #8B0000;
 }
 .results-actions button#savePdfButton {
     background-color: #6A0DAD; /* PURPLE (Darker) */
@@ -371,54 +373,55 @@ button[type="submit"]#submitButton:hover {
 #results-section #printable-results-area > p {
     font-size: 1.05em;
     margin-bottom: 0.7em;
-    color: #ADD8E6; /* Light blue text */
+    color: #ADD8E6;
 }
 #results-section #printable-results-area > p > span {
     font-weight: 500;
-    color: #AFEEEE; /* PALE TURQUOISE for spans */
+    color: #AFEEEE; /* PALE TURQUOISE */
 }
 .archetype-component {
     color: #B0C4DE; /* LIGHT STEEL BLUE */
     margin-bottom: 0.6em;
+    /* margin-left: 15px; */ /* Indent if desired */
     font-size: 1.05em;
 }
 .archetype-component strong {
-    color: #E6E6FA; /* LAVENDER for labels */
+    color: #E6E6FA; /* LAVENDER */
     font-weight: bold;
 }
 .archetype-component span[id*="-name"] {
      font-weight: 500;
-     color: #AFEEEE; /* PALE TURQUOISE */
+     color: #AFEEEE;
 }
 #result-scores-list {
     list-style-type: none;
     padding: 0;
     margin-top: 25px;
 }
-#result-scores-list > h3 { /* "Understanding Your Traits:" */
+#result-scores-list > h3 {
     margin-bottom: 18px;
     font-size: 1.4em;
-    color: #7FFFD4; /* AQUAMARINE */
+    color: #7FFFD4;
     border-bottom: 1px solid #004D4D;
     padding-bottom: 8px;
 }
 #result-scores-list > li {
     padding: 12px 0;
     border-bottom: 1px dashed #004D4D;
-    color: #B0E0E6; /* POWDER BLUE for li text */
+    color: #B0E0E6; /* POWDER BLUE */
 }
 #result-scores-list > li:last-child:not(.alternative-suggestion-item) {
     border-bottom: none;
 }
-#result-scores-list li > strong { /* Trait name, score, direction */
+#result-scores-list li > strong {
     display: block;
     margin-bottom: 6px;
-    color: #AFEEEE; /* PALE TURQUOISE */
+    color: #AFEEEE;
     font-size: 1.1em;
 }
 .trait-description-text {
     display: block;
-    color: #C0D8D8; /* Lighter Powder Blue for blurbs */
+    color: #C0D8D8; /* Lighter Powder Blue */
     line-height: 1.55;
     font-size: 0.98em;
     margin-top: 4px;
@@ -429,7 +432,7 @@ button[type="submit"]#submitButton:hover {
     margin-top: 10px;
     padding: 10px 10px 10px 15px;
     border-left: 3px solid #8A2BE2; /* PURPLE accent */
-    background-color: #1E3A3A; /* Very Dark Teal for background */
+    background-color: #1E3A3A; /* Very Dark Teal background */
     font-size: 0.95em;
     border-bottom: none !important;
     border-radius: 4px;
@@ -439,12 +442,11 @@ button[type="submit"]#submitButton:hover {
     font-style: normal;
 }
 .alternative-suggestion-item em {
-    color: #B0C4DE; /* Light Steel Blue */
+    color: #B0C4DE;
     font-style: normal;
 }
 
 /* --- Styling for Info Page Lists (archetypes.html, factors.html) --- */
-/* These pages will also have the dark background from body */
 .blurb-list-container ul,
 .factor-list-container ul {
     list-style: none;
@@ -452,32 +454,30 @@ button[type="submit"]#submitButton:hover {
 }
 .blurb-list-container li,
 .factor-list-container li {
-    background-color: #1E1E1E; /* Dark grey item background */
+    background-color: #1E1E1E;
     border: 1px solid #333333;
     padding: 15px 20px;
     margin-bottom: 15px;
     border-radius: 6px;
-    /* box-shadow: 0 2px 4px rgba(255,255,255,0.03); */
 }
-.blurb-list-container li strong, /* Archetype component name */
-.factor-list-container li h3 {   /* Trait full name */
-    color: #40E0D0; /* BRIGHTER TEAL */
+.blurb-list-container li strong,
+.factor-list-container li h3 {
+    color: #40E0D0;
     display: block;
     margin-bottom: 8px;
     font-size: 1.15em;
 }
-.factor-list-container li p { /* High, Mod, Low descriptions */
+.factor-list-container li p {
     margin-bottom: 5px;
     font-size: 0.95em;
-    color: #00A0A0; /* TEAL */
+    color: #00A0A0;
 }
-.factor-list-container li p strong { /* "High:", "Moderate:", "Low:" labels */
-    color: #AEAEAE; /* Light Grey for labels */
+.factor-list-container li p strong {
+    color: #AEAEAE;
     font-weight: 600;
 }
 
 /* --- FAQ Page Specifics --- */
-/* FAQ items will also be on dark background */
 .faq-item {
     margin-bottom: 25px;
     padding-bottom: 15px;
@@ -486,14 +486,14 @@ button[type="submit"]#submitButton:hover {
 .faq-item:last-child {
     border-bottom: none;
 }
-.faq-item h3 { /* Question */
+.faq-item h3 {
     margin-bottom: 0.5em;
-    color: #40E0D0; /* BRIGHTER TEAL */
+    color: #40E0D0;
     font-size: 1.2em;
 }
-.faq-item p { /* Answer */
+.faq-item p {
     margin-left: 0;
-    color: #00A0A0; /* TEAL */
+    color: #00A0A0;
 }
 
 
@@ -511,9 +511,8 @@ button[type="submit"]#submitButton:hover {
     nav ul li a {
         display: block;
     }
-    .info-grid {
-        grid-template-columns: 1fr;
-    }
+    /* .info-grid structure with flexbox already handles responsiveness well,
+       but you could adjust flex-basis here if needed for tablet sizes specifically */
 }
 
 @media (max-width: 480px) {
@@ -526,7 +525,7 @@ button[type="submit"]#submitButton:hover {
         padding-right: 10px;
     }
     header h1 { font-size: 1.5em; }
-    main:not(.landing-main) h2, .landing-main .hero h2 { font-size: 1.3em; }
+    main:not(.landing-main) h2, .landing-main .hero h2 { font-size: 1.4em; } /* Adjusted hero h2 for consistency */
     main:not(.landing-main) h3, .info-card h3, .faq-item h3 { font-size: 1.15em; }
 
     .results-actions {
@@ -539,6 +538,9 @@ button[type="submit"]#submitButton:hover {
     .results-actions button:last-child {
         margin-bottom: 0;
     }
-}
+
+    .info-card {
+        flex-basis: 100%; /* Make cards full width on very small screens */
+        min-width: unset; /* Override min-width if needed */
     }
 }
